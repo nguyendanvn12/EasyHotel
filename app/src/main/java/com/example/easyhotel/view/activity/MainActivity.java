@@ -10,9 +10,12 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.easyhotel.R;
+import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityMainBinding;
 import com.example.easyhotel.view.Event;
 import com.example.easyhotel.view.adapter.MainBackgroundAdapter;
@@ -93,8 +96,8 @@ handler.post(update);
     }
 
     @Override
-    public void itemPlaceClick() {
-
+    public void itemPlaceClick(SearchModel model) {
+        Log.d("Ccc",model==null?"ccc":model.getTitle());
     }
 
     @Override
@@ -110,7 +113,7 @@ handler.post(update);
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+        mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 
 

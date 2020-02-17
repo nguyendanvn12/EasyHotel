@@ -40,12 +40,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             gpsBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_gps, parent, false);
+            gpsBinding.setEven(event);
             return new ViewHolder(gpsBinding);
         } else if (viewType == 1) {
             placeBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_search_place, parent, false);
+            placeBinding.setEvent(event);
             return new ViewHolder(placeBinding);
         } else if(viewType==2){
             hotelBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_search_hotel, parent, false);
+            hotelBinding.setEvent(event);
             return new ViewHolder(hotelBinding);
         }
             headerBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_header, parent, false);
@@ -60,11 +63,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 break;
             case 1:
                 holder.placeBinding.setVar(datas.get(position));
-                holder.placeBinding.setEvent(event);
+                holder.placeBinding.executePendingBindings();
                 break;
             case 2:
             holder.hotelBinding.setData(datas.get(position));
-            holder.hotelBinding.setEvent(event);
+            holder.hotelBinding.executePendingBindings();
                 break;
             default:
                 holder.headerBinding.setData(datas.get(position));

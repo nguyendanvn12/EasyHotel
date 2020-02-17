@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.FragmentSearchBinding;
+import com.example.easyhotel.view.activity.MainActivity;
 import com.example.easyhotel.view.adapter.SearchAdapter;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search,container,false);
         adapter = new SearchAdapter();
+        adapter.setEvent((MainActivity)getActivity());
         binding.rvSearchResult.setAdapter(adapter);
         binding.rvSearchResult.setLayoutManager(new LinearLayoutManager(getContext()));
         initData();
