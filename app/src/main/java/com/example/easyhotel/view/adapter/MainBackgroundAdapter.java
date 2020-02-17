@@ -21,6 +21,12 @@ public class MainBackgroundAdapter extends androidx.viewpager.widget.PagerAdapte
         imgs.add(R.drawable.hoian);
         imgs.add(R.drawable.kur);
         imgs.add(R.drawable.sing);
+        imgs.add(R.drawable.background1);
+        imgs.add(R.drawable.background2);
+        imgs.add(R.drawable.background3);
+        imgs.add(R.drawable.background4);
+        imgs.add(R.drawable.background5);
+
     }
 
     @Override

@@ -5,38 +5,144 @@
 
     <data>
 
+        <variable
+            name="event"
+            type="com.example.easyhotel.view.Event" />
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/draw_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/draw_layout"
         android:fitsSystemWindows="true"
         tools:context=".view.activity.MainActivity">
 
         <FrameLayout
+            android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#00000000"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/search_background_l1"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_background_l2"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="1dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/dat_Phong"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="Đặt hơn 11.000 khách sạn"
+                        android:onClick="@{()->event.onLocalSearchClick()}"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="Tìm kiếm điểm đến khách sạn"
+                        android:onClick="@{()->event.onLocalSearchClick()}"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="#60000000" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="Ngày nhận phòng"
+                        android:onClick="@{()->event.onPickCheckIn()}"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="Tìm kiếm điểm đến khách sạn"
+                        android:onClick="@{()->event.onPickCheckIn()}"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="#60000000" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="Thời hạn"
+                        android:onClick="@{()->event.onPickDuration()}"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:text="1 đêm"
+                        android:onClick="@{()->event.onPickDuration()}"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/search_background_btn"
+                    android:text="Tìm Kiếm"
+                    android:onClick="@{()->event.onSearchClick()}"
+                    android:textColor="#fff" />
+            </LinearLayout>
 
         </FrameLayout>
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:menu="@menu/drawer_menu"
-            />
+            app:menu="@menu/drawer_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
