@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.FragmentSearchBinding;
+import com.example.easyhotel.view.CloseCallBack;
 import com.example.easyhotel.view.activity.MainActivity;
 import com.example.easyhotel.view.adapter.SearchAdapter;
 
@@ -34,10 +35,16 @@ public class SearchFragment extends Fragment {
         adapter.setEvent((MainActivity)getActivity());
         binding.rvSearchResult.setAdapter(adapter);
         binding.rvSearchResult.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.setEvent(closeCallBack);
         initData();
         return binding.getRoot();
     }
-
+private final CloseCallBack closeCallBack = new CloseCallBack() {
+    @Override
+    public void close() {
+        getActivity().onBackPressed();
+    }
+};
     private void initData() {
         mSearchModels = new ArrayList<>();
         List<SearchModel>  history = new ArrayList<>();

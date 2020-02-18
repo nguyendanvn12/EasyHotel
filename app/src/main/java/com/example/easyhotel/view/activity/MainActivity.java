@@ -7,19 +7,22 @@ import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityMainBinding;
 import com.example.easyhotel.view.Event;
 import com.example.easyhotel.view.adapter.MainBackgroundAdapter;
+import com.example.easyhotel.view.fragment.PickCheckInDateFragment;
 import com.example.easyhotel.view.fragment.SearchFragment;
+import com.example.easyhotel.viewmodel.MainViewModel;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements Event {
     private MainBackgroundAdapter mMainBackgroundAdapter;
     private int curren = Integer.MAX_VALUE / 2 + 1;
 private FragmentManager fragmentManager;
+private MainViewModel viewModel;
+    BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,10 @@ private FragmentManager fragmentManager;
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_24px);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mMainBackgroundAdapter = new MainBackgroundAdapter();
+        mBinding.setLifecycleOwner(this);
+        mBinding.setViewmodel(viewModel);
         mBinding.background.setAdapter(mMainBackgroundAdapter);
         mBinding.setEvent(this);
         final Handler handler = new Handler();
@@ -59,7 +67,9 @@ handler.post(update);
         },4000,2000);
         fragmentManager = getSupportFragmentManager();
 
-
+        bottomSheetBehavior = BottomSheetBehavior.from(mBinding.durationSheet);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehavior.setPeekHeight(0);
     }
 
     @Override
@@ -82,12 +92,16 @@ handler.post(update);
 
     @Override
     public void onPickCheckIn() {
-
+        mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        PickCheckInDateFragment fragment = new PickCheckInDateFragment();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,fragment).addToBackStack(null).commit();
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onPickDuration() {
-
+        mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
@@ -97,7 +111,8 @@ handler.post(update);
 
     @Override
     public void itemPlaceClick(SearchModel model) {
-        Log.d("Ccc",model==null?"ccc":model.getTitle());
+        viewModel.set_keyword(model.getTitle());
+        onBackPressed();
     }
 
     @Override
@@ -114,6 +129,7 @@ handler.post(update);
     public void onBackPressed() {
         super.onBackPressed();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
     }
 
 

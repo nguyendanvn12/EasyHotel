@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.PickCheckInDateFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="maxdate"
+            type="Long" />
+<variable
+    name="close"
+    type="com.example.easyhotel.view.CloseCallBack" />
+        <variable
+            name="event"
+            type="com.example.easyhotel.view.Event" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:background="#fff"
+        tools:context=".view.fragment.PickCheckInDateFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:padding="16dp"
+            android:background="@color/main">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:text="Check in date"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Close"
+                android:onClick="@{()->close.close()}"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <CalendarView
+            android:id="@+id/calendar_check_in"
+            android:layout_width="match_parent"
+            android:minDate="@{System.currentTimeMillis()-1000}"
+            android:maxDate="@{maxdate}"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>
