@@ -8,7 +8,7 @@
             type="Long" />
 <variable
     name="close"
-    type="com.example.easyhotel.view.CloseCallBack" />
+    type="com.example.easyhotel.view.CallBack" />
         <variable
             name="event"
             type="com.example.easyhotel.view.Event" />

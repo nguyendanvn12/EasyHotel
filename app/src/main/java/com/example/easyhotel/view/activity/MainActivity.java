@@ -6,19 +6,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityMainBinding;
 import com.example.easyhotel.view.Event;
 import com.example.easyhotel.view.adapter.MainBackgroundAdapter;
+import com.example.easyhotel.view.fragment.BottomSheetDurationFragment;
 import com.example.easyhotel.view.fragment.PickCheckInDateFragment;
 import com.example.easyhotel.view.fragment.SearchFragment;
 import com.example.easyhotel.viewmodel.MainViewModel;
@@ -33,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements Event {
     private int curren = Integer.MAX_VALUE / 2 + 1;
 private FragmentManager fragmentManager;
 private MainViewModel viewModel;
-    BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +73,7 @@ handler.post(update);
         },4000,2000);
         fragmentManager = getSupportFragmentManager();
 
-        bottomSheetBehavior = BottomSheetBehavior.from(mBinding.durationSheet);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetBehavior.setPeekHeight(0);
+
     }
 
     @Override
@@ -97,11 +101,12 @@ handler.post(update);
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,fragment).addToBackStack(null).commit();
     }
 
-    @SuppressLint("ResourceType")
+
     @Override
     public void onPickDuration() {
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        BottomSheetDurationFragment fragment = new BottomSheetDurationFragment();
+        fragment.show(fragmentManager,fragment.getTag());
     }
 
     @Override
@@ -112,6 +117,8 @@ handler.post(update);
     @Override
     public void itemPlaceClick(SearchModel model) {
         viewModel.set_keyword(model.getTitle());
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         onBackPressed();
     }
 
@@ -124,6 +131,8 @@ handler.post(update);
     public void itemGPSClick() {
 
     }
+
+
 
     @Override
     public void onBackPressed() {

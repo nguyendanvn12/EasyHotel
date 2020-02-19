@@ -24,9 +24,6 @@
         android:fitsSystemWindows="true"
         tools:context=".view.activity.MainActivity">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/main_container"
@@ -146,78 +143,6 @@
                 </LinearLayout>
 
             </FrameLayout>
-
-            <LinearLayout
-                android:id="@+id/duration_sheet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-
-                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-
-                android:orientation="vertical"
-                tools:context=".view.fragment.PickDurationFragment">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:text="Chọn thời gian thuê"
-                    android:textColor="#000" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#fff">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:paddingHorizontal="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/close"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/close"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/cancel_brn_background"
-                        android:text="Huỷ"
-                        android:textColor="@color/main"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_chon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1" />
-
-                    <Button
-                        android:id="@+id/btn_chon"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="16dp"
-                        android:background="@drawable/search_background_btn"
-                        android:text="Chọn"
-                        android:textColor="#fff"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/close"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1"
-
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

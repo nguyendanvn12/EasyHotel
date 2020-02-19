@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="event"
+            type="com.example.easyhotel.view.Event" />
 <variable
-    name="event"
-    type="com.example.easyhotel.view.CloseCallBack" />
+    name="close"
+    type="com.example.easyhotel.view.CallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/keyword_background"
+                android:onTextChanged="@{(text, start, before, count) ->close.keywordChanged(text)}"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="6dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -46,7 +50,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:text="Huỷ"
-            android:onClick="@{()->event.close()}"
+            android:onClick="@{()->close.close()}"
             android:textColor="#333"
             android:textSize="12sp"
             android:textStyle="bold"
