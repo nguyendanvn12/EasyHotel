@@ -6,18 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Rect;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.easyhotel.R;
@@ -29,7 +25,6 @@ import com.example.easyhotel.view.fragment.BottomSheetDurationFragment;
 import com.example.easyhotel.view.fragment.PickCheckInDateFragment;
 import com.example.easyhotel.view.fragment.SearchFragment;
 import com.example.easyhotel.viewmodel.MainViewModel;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -111,7 +106,9 @@ handler.post(update);
 
     @Override
     public void onSearchClick() {
-
+        Intent intent = new Intent(MainActivity.this, ListHotelActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.hold);
     }
 
     @Override

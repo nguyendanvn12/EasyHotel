@@ -99,7 +99,6 @@ public class BottomSheetDurationFragment extends BottomSheetDialogFragment {
         public int getPaddingTop() {
 
             int h1 = getChildAt(0)!=null? getChildAt(0).getMeasuredHeight():0;
-            Log.d("ccc",h1+"");
             return Math.round((dpToPx(200)-h1) / 2);
         }
 
