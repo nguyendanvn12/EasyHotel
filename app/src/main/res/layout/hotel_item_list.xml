@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="data"
-    type="com.example.easyhotel.data.model.ListHotel.Hotel" />
+        <variable
+            name="data"
+            type="com.example.easyhotel.data.model.Hotel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:paddingRight="6dp">
+        android:paddingRight="6dp"
+        android:background="#fff">
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="120dp"
-            android:layout_height="180dp"
+            android:layout_height="160dp"
             android:scaleType="centerCrop"
             android:src="@drawable/background1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="@{data.hotelName}"
+            android:text="jhf shls jkshfdgkljsfklgs "
             android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -43,36 +44,43 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0" />
 
-        <androidx.appcompat.widget.AppCompatRatingBar
+        <TextView
             android:id="@+id/rb_star"
+            android:text="⋆⋆⋆⋆"
+            android:textColor="@color/main"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="@{Integer.toString(data.star)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.077"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@id/tv_hotel_name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginLeft="12dp"/>
 
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{data.address}"
+            android:text="Số 21 Hàng Thùng, Phường Lý Thái Tổ, Quận Hoàn Kiếm, Thành phố Hà Nội"
+            android:textStyle="italic"
+            android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@id/rb_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/tv_review_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Float.toString(data.reviewPoint)}"
+            android:text="6.8"
+            android:textAlignment="center"
             android:layout_marginLeft="12dp"
             android:background="@drawable/review_point_background"
             app:layout_constraintTop_toBottomOf="@id/tv_address"
@@ -110,7 +118,9 @@
             android:id="@+id/tv_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{Integer.toString(data.discount)+"%"}'
+            android:text='12%'
+            android:padding="3dp"
+            android:textAlignment="center"
             android:background="@drawable/discount_background"
             app:layout_constraintTop_toBottomOf="@id/tv_address"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -123,13 +133,13 @@
             android:id="@+id/sale_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="1233435435 đ"
             app:layout_constraintTop_toBottomOf="@id/tv_discount"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintVertical_bias="1" />
+            app:layout_constraintVertical_bias="0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

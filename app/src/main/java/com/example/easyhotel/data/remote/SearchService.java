@@ -1,6 +1,6 @@
 package com.example.easyhotel.data.remote;
 
-import com.example.easyhotel.data.model.ListHotel.Hotel;
+import com.example.easyhotel.data.model.Hotel;
 import com.example.easyhotel.data.model.searchresult.SearchResult;
 
 import java.util.List;
@@ -14,7 +14,8 @@ public interface SearchService {
     Call<SearchResult> getSearch(@Query("keyword")String keyword);
 
     @GET("list-hotel-availibity")
-    Call<List<Hotel>> getListHotel(@Query("state_id")String stateId, @Query("city_id")String cityId, @Query("pages")Integer pages, @Query("min_price")Integer minPrice, @Query("max_price")Integer maxPrice,
+    Call<List<Hotel>> getListHotel(@Query("state_id")Integer stateId, @Query("city_id")Integer cityId, @Query("pages")Integer pages, @Query("min_price")Integer minPrice, @Query("max_price")Integer maxPrice,
                             @Query("star")Integer star);
+
 
 }

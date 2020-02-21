@@ -1,5 +1,5 @@
 
-package com.example.easyhotel.data.model.ListHotel;
+package com.example.easyhotel.data.model;
 
 import android.content.Intent;
 

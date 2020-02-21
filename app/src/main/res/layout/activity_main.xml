@@ -21,6 +21,7 @@
         android:id="@+id/draw_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:splitMotionEvents="false"
         android:fitsSystemWindows="true"
         tools:context=".view.activity.MainActivity">
 
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginTop="48dp"
+                    android:splitMotionEvents="false"
                     android:background="@drawable/search_background_l1"
                     android:orientation="vertical"
                     android:padding="8dp">
