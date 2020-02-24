@@ -21,9 +21,6 @@ public class Hotel {
     @SerializedName("review_point")
     @Expose
     private Float reviewPoint;
-    @SerializedName("num_review")
-    @Expose
-    private Integer numReview;
     @SerializedName("address")
     @Expose
     private String address;
@@ -83,15 +80,6 @@ public class Hotel {
     public void setReviewPoint(Float reviewPoint) {
         this.reviewPoint = reviewPoint;
     }
-
-    public Integer getNumReview() {
-        return numReview;
-    }
-
-    public void setNumReview(Integer numReview) {
-        this.numReview = numReview;
-    }
-
     public String getAddress() {
         return address;
     }

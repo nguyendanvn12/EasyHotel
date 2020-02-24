@@ -78,7 +78,7 @@
             android:id="@+id/rv_list_hotel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#e8e8e8"
+            android:background="#eeeeee"
             android:layout_weight="1" />
 
         <LinearLayout

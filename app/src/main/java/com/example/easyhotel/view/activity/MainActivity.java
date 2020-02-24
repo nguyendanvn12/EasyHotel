@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -71,7 +72,7 @@ handler.post(update);
 
 
     }
-
+    private long mLastClickTime = 0;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -85,6 +86,10 @@ handler.post(update);
 
     @Override
     public void onLocalSearchClick() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         SearchFragment searchFragment = new SearchFragment();
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,searchFragment).addToBackStack(null).commit();
@@ -92,6 +97,10 @@ handler.post(update);
 
     @Override
     public void onPickCheckIn() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         PickCheckInDateFragment fragment = new PickCheckInDateFragment();
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,fragment).addToBackStack(null).commit();
@@ -100,6 +109,10 @@ handler.post(update);
 
     @Override
     public void onPickDuration() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         BottomSheetDurationFragment fragment = new BottomSheetDurationFragment();
         fragment.show(fragmentManager,fragment.getTag());

@@ -87,4 +87,9 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
     public void openMap() {
 
     }
+
+    @Override
+    public void pickHotel(Hotel hotel) {
+
+    }
 }
