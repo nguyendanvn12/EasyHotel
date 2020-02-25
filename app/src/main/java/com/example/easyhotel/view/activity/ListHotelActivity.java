@@ -89,7 +89,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
     }
 
     @Override
-    public void pickHotel(Hotel hotel) {
+    public void pickHotel(int hotelId) {
 
     }
 }

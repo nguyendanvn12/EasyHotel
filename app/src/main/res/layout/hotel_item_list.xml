@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:paddingRight="6dp"
-        android:onClick="@{()->event.pickHotel(data)}"
+        android:onClick="@{()->event.pickHotel(data.hotelId)}"
         android:background="#fff">
 
         <ImageView

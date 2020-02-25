@@ -7,10 +7,59 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".view.activity.DetailsHotelActivity">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#fff"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:src="@drawable/ic_chevron_left_black_24dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:padding="6dp"
+                android:text="Chọn phòng"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:src="@drawable/ic_favorite_border_24px" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/search_background_btn"
+                android:src="@drawable/ic_call_black_24dp" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

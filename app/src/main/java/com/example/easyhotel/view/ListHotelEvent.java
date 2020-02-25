@@ -8,5 +8,5 @@ public interface ListHotelEvent {
     void openSapXep();
     void openLoc();
     void openMap();
-    void pickHotel(Hotel hotel);
+    void pickHotel(int hotelId);
 }
