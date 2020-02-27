@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.Hotel;
 import com.example.easyhotel.databinding.HotelItemListBinding;
+import com.example.easyhotel.view.ListHotelEvent;
 
 import java.util.List;
 
@@ -20,11 +21,16 @@ public class ListHotelAdapter extends RecyclerView.Adapter {
     private List<Hotel> hotels;
     private HotelItemListBinding binding;
     private Context context;
-
+    private ListHotelEvent event;
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
         notifyDataSetChanged();
     }
+
+    public void setEvent(ListHotelEvent event){
+        this.event = event;
+    }
+
 
     @NonNull
     @Override
@@ -38,7 +44,8 @@ public class ListHotelAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Hotel hotel =hotels.get(position);
         binding.setData(hotel);
-        StringBuilder url = new StringBuilder("http://10.1.42.83/hotel/resource/hotel/");
+        binding.setEvent(event);
+        StringBuilder url = new StringBuilder("http://10.0.0.14/hotel/resource/hotel/");
         url.append(hotel.getHotelName()).append("/thumb/").append(hotel.getThumb());
         Log.d("ccc",url.toString());
         Glide.with(context)

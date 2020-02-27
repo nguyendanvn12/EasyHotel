@@ -52,12 +52,39 @@
                 android:background="@drawable/search_background_btn"
                 android:src="@drawable/ic_call_black_24dp" />
         </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Khách sạn abc"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="\u2605\u2605\u2605\u2605"
+                    android:textColor="@color/main" />
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
+                <View
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="10000dp"/>
 
             </LinearLayout>
         </ScrollView>

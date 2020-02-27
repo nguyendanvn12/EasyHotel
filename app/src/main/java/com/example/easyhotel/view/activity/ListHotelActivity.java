@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.Hotel;
@@ -33,6 +34,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_hotel);
         viewModel = new ViewModelProvider(this).get(ListHotelViewModel.class);
         adapter = new ListHotelAdapter();
+        adapter.setEvent(this);
         binding.rvListHotel.setAdapter(adapter);
         binding.rvListHotel.setLayoutManager(new LinearLayoutManager(this));
         binding.setEvent(this);
@@ -90,6 +92,8 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
 
     @Override
     public void pickHotel(int hotelId) {
-
+        Log.d("ccc","c");
+    Intent intent = new Intent(ListHotelActivity.this,DetailsHotelActivity.class);
+    startActivity(intent);
     }
 }
