@@ -24,13 +24,14 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp">
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_back"
                 android:onClick="@{()->event.back()}"
-                android:src="@drawable/ic_chevron_left_black_24dp"
-                android:background="#fff"
+                android:text="\ue906"
+                android:fontFamily="@font/fonticon"
+                android:background="#00000000"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -59,14 +60,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="2dp"
                 android:id="@+id/btn_call"
                 android:onClick="@{()->event.call()}"
-                android:src="@drawable/ic_call_black_24dp"
-                android:background="@drawable/search_background_btn"
+                android:text="\uf87b"
+                android:textSize="37sp"
+                android:textColor="@color/main"
+                android:padding="0dp"
+                android:background="#00000000"
+                android:fontFamily="@font/fa_solid_900"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

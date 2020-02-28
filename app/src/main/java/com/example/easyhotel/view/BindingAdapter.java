@@ -1,12 +1,21 @@
 package com.example.easyhotel.view;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
+import android.os.Build;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.example.easyhotel.R;
 
 public class BindingAdapter {
     @androidx.databinding.BindingAdapter("flexBackground")
@@ -23,7 +32,6 @@ public class BindingAdapter {
             bg.setColor(Color.parseColor("#999999"));
         }
     }
-
     @androidx.databinding.BindingAdapter("textColor")
     public static void setTextColor(TextView view, float point){
 
@@ -48,19 +56,19 @@ public class BindingAdapter {
     public static void setStar(TextView view,int star){
         switch (star){
             case 1:
-                view.setText("⋆");
+                view.setText("\uf005");
                 break;
             case 2:
-                view.setText("⋆⋆");
+                view.setText("\uf005\uf005");
                 break;
             case 3:
-                view.setText("⋆⋆⋆");
+                view.setText("\uf005\uf005\uf005");
                 break;
             case 4:
-                view.setText("⋆⋆⋆⋆");
+                view.setText("\uf005\uf005\uf005\uf005");
                 break;
             case 5:
-                view.setText("⋆⋆⋆⋆⋆");
+                view.setText("\uf005\uf005\uf005\uf005\uf005");
                 break;
         }
     }
