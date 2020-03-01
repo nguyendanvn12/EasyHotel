@@ -43,7 +43,7 @@ public class DataRepo {
             @Override
             public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
                 hotes.setValue(response.body());
-                Log.d("ccc","ccc");
+                Log.d("ccc","ccc12");
             }
 
             @Override

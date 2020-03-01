@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.example.easyhotel.R;
@@ -40,7 +41,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         binding.setEvent(this);
         int id = 1;
 
-        viewModel.getListHotel(id,null,null,null,null,null).observe(this, new Observer<List<Hotel>>() {
+        viewModel.getListHotel(id, null, null, null, null, null).observe(this, new Observer<List<Hotel>>() {
             @Override
             public void onChanged(List<Hotel> hotels) {
                 adapter.setHotels(hotels);
@@ -61,15 +62,15 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
 
     @Override
     public void call() {
-        String tel = "tel:"+R.string.so_tong_dai;
+        String tel = "tel:" + R.string.so_tong_dai;
         Uri uri = Uri.parse(tel);
         Intent intent = new Intent(Intent.ACTION_CALL, uri);
         if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    Activity#requestPermissions
-            ActivityCompat.requestPermissions(ListHotelActivity.this,new String[]{Manifest.permission.CALL_PHONE},1);
+            ActivityCompat.requestPermissions(ListHotelActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
             return;
-        }else {
+        } else {
             startActivity(intent);
         }
 
@@ -90,10 +91,16 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
 
     }
 
+    private long mLastClickTime = 0;
+
     @Override
     public void pickHotel(int hotelId) {
-        Log.d("ccc","c");
-    Intent intent = new Intent(ListHotelActivity.this,DetailsHotelActivity.class);
-    startActivity(intent);
+
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        Intent intent = new Intent(ListHotelActivity.this, DetailsHotelActivity.class);
+        startActivity(intent);
     }
 }

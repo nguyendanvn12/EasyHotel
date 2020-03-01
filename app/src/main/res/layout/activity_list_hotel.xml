@@ -21,11 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#fff"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp">
+            android:paddingVertical="4dp">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_back"
                 android:onClick="@{()->event.back()}"
@@ -61,14 +60,13 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_call"
                 android:onClick="@{()->event.call()}"
                 android:text="\uf87b"
-                android:textSize="37sp"
+                android:textSize="40sp"
                 android:textColor="@color/main"
-                android:padding="0dp"
                 android:background="#00000000"
                 android:fontFamily="@font/fa_solid_900"
                 app:layout_constraintTop_toTopOf="parent"

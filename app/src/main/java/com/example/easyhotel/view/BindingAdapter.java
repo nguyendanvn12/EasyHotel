@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
@@ -16,6 +17,9 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.easyhotel.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BindingAdapter {
     @androidx.databinding.BindingAdapter("flexBackground")

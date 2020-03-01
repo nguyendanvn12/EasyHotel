@@ -3,5 +3,8 @@
     <string name="login_logout"><![CDATA[Đăng nhập & Đăng ký]]></string>
     <string name="dat_Phong">Đặt phòng</string>
     <string name="so_tong_dai">0327910505</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="up">\ue908</string>
+    <string name="down">\ue905</string>
+    <string name="left">\ue906</string>
+    <string name="right">\ue907</string>
 </resources>
