@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.text.Html" />
+
+        <import type="com.example.easyhotel.data.converter.DataConverter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:background="#fff"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/iv_room_thumb"
@@ -26,91 +31,90 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deluxe fnds"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="#1C90FE"
             android:paddingHorizontal="16dp"
             android:paddingVertical="2dp"
+            android:text="Deluxe fnds"
+            android:textColor="#1C90FE"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_room_thumb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintStart_toEndOf="@+id/iv_room_thumb"
-            app:layout_constraintTop_toTopOf="@id/iv_room_thumb" />
+            app:layout_constraintTop_toTopOf="@id/iv_room_thumb"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/tv_bed_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/fonticon"
             android:text="\ue90d"
             android:textSize="16sp"
-            android:fontFamily="@font/fonticon"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintTop_toBottomOf="@+id/iv_room_thumb"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_room_thumb"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="1 giường cỡ xxx"
-            app:layout_constraintTop_toTopOf="@+id/tv_bed_icon"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bed_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_bed_icon" />
 
         <TextView
             android:id="@+id/tv_area_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/fonticon"
             android:text="\ue932"
             android:textSize="16sp"
-            android:fontFamily="@font/fonticon"
-            android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bed_icon"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bed_icon"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="1 giường cỡ xxx"
-            app:layout_constraintTop_toTopOf="@+id/tv_area_icon"
             app:layout_constraintBottom_toBottomOf="@+id/tv_area_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_area_icon" />
 
         <TextView
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#999"
             android:layout_marginTop="16dp"
+            android:background="#999"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_area_icon" />
+
         <TextView
             android:id="@+id/tv_refund_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/fonticon"
             android:text="\ue932"
             android:textSize="12sp"
-            android:fontFamily="@font/fonticon"
-            android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,50 +122,112 @@
             android:layout_marginStart="2dp"
             android:text="Huỷ phòng: Không hoàn huỷ"
             android:textSize="12sp"
-            app:layout_constraintTop_toTopOf="@+id/tv_refund_icon"
             app:layout_constraintBottom_toBottomOf="@+id/tv_refund_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_refund_icon"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_refund_icon" />
 
         <TextView
             android:id="@+id/tv_breakfast_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/fonticon"
             android:text="\ue932"
             android:textSize="12sp"
-            android:fontFamily="@font/fonticon"
-            android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_refund_icon"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_refund_icon"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:textSize="12sp"
             android:text="Bữa ăn: Bao gồm bữa ăn sáng"
-            app:layout_constraintTop_toTopOf="@+id/tv_breakfast_icon"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_breakfast_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_breakfast_icon"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tv_breakfast_icon" />
+
         <TextView
             android:id="@+id/tv_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\ue944"
-            android:fontFamily="@font/fonticon"
-            android:textSize="12sp"
             android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="#c70000"
+            android:fontFamily="@font/ivy_title"
+            android:padding="4dp"
+            android:text="12% off"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/tv_origin_price"
+            hideIfZero="@{1}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:text='@{Html.fromHtml("&lt;strike>"+DataConverter.currency(1000000)+"&lt;/strike>")}'
+            app:layout_constraintBottom_toBottomOf="@id/tv_discount"
+            app:layout_constraintEnd_toStartOf="@+id/tv_discount"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_discount" />
+
+        <TextView
+            android:id="@+id/sale_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{Html.fromHtml("&lt;span style=\"color:#5a8a0d;\">&lt;big>"+DataConverter.currency(12000000)+"&lt;/big>&lt;/span> /đêm")}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toBottomOf="@id/tv_discount"
+            app:layout_constraintVertical_bias="0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="#999"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_breakfast_icon" />
+
+        <TextView
+            android:id="@+id/text_suc_chua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Sức chứa: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_breakfast_icon" />
+
+        <TextView
+            android:id="@+id/tv_suc_chua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#efefef"
+            android:text="2"
+            app:layout_constraintBottom_toBottomOf="@+id/text_suc_chua"
+            app:layout_constraintStart_toEndOf="@+id/text_suc_chua"
+            app:layout_constraintTop_toTopOf="@+id/text_suc_chua" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fa_regular_400"
+            android:text="\uf007"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_suc_chua"
+            app:layout_constraintStart_toEndOf="@+id/tv_suc_chua"
+            app:layout_constraintTop_toTopOf="@+id/tv_suc_chua" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

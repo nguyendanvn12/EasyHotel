@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -24,7 +25,7 @@ import java.util.Date;
 
 public class BindingAdapter {
     @androidx.databinding.BindingAdapter("flexBackground")
-    public static void setBackgroundColor(View view, float point) {
+    public static void setBackgroundColor(@NonNull View view, float point) {
         GradientDrawable bg = (GradientDrawable) view.getBackground();
 
         if (point >= 9) {
@@ -84,7 +85,7 @@ public class BindingAdapter {
     }
 
     @androidx.databinding.BindingAdapter("hideIfZero")
-    public static void hide(View view, int discount) {
+    public static void hide(@NonNull View view, int discount) {
         view.setVisibility(discount == 0 ? View.GONE : View.VISIBLE);
     }
 
