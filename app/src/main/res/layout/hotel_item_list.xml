@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <import type="android.text.Html"/>
         <import type="com.example.easyhotel.data.converter.DataConverter"/>
         <variable
@@ -93,6 +94,7 @@
             android:paddingHorizontal="4dp"
             android:paddingVertical="5dp"
             flexBackground="@{data.reviewPoint}"
+            android:visibility="@{data.reviewPoint==0?View.GONE:View.VISIBLE}"
             android:background="@drawable/review_point_background"
             app:layout_constraintTop_toBottomOf="@id/tv_address"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,6 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            textColor="@{data.reviewPoint}"
+            android:visibility="@{data.reviewPoint==0?View.GONE:View.VISIBLE}"
             app:layout_constraintTop_toTopOf="@+id/tv_review_point"
             app:layout_constraintBottom_toBottomOf="@id/tv_review_point"
             app:layout_constraintStart_toEndOf="@+id/tv_review_point"

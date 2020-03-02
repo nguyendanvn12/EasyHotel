@@ -4,10 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="com.example.easyhotel.viewmodel.DetailsHotelViewModel" />
+
+        <variable
+            name="event"
+            type="com.example.easyhotel.view.DetailsHotelEvent" />
+        <variable
+            name="hoteldetails"
+            type="com.example.easyhotel.data.model.hoteldetails.HotelDetails" />
     </data>
 
     <LinearLayout
@@ -29,6 +37,7 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:fontFamily="@font/fonticon"
+                android:onClick="@{()->event.back()}"
                 android:text="\ue906"
                 android:textSize="16sp" />
 
@@ -49,6 +58,7 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:fontFamily="@font/fa_regular_400"
+                android:onClick="@{()->event.like(hoteldetails.hotelId)}"
                 android:text="\uf004"
                 android:textSize="40sp" />
 
@@ -59,6 +69,7 @@
                 android:background="#00000000"
                 android:fontFamily="@font/fa_solid_900"
                 android:padding="0dp"
+                android:onClick="@{()->event.callCSKH()}"
                 android:text="\uf87b"
                 android:textColor="@color/main"
                 android:textSize="40sp" />
@@ -79,17 +90,17 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="4dp"
-                    android:text="Khách sạn abc"
+                    android:text="@{hoteldetails.hotelName}"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    star="@{hoteldetails.star}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/fa_solid_900"
                     android:paddingStart="16dp"
                     android:paddingBottom="16dp"
-                    android:text="\uf005\uf005\uf005\uf005"
                     android:textColor="@color/main" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,6 +125,7 @@
                         android:background="@drawable/pre_next_slide_background"
                         android:fontFamily="@font/fonticon"
                         android:text="\ue906"
+                        android:onClick="@{()->event.preSlide()}"
                         android:textColor="#fff"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toBottomOf="@+id/vp_slider"
@@ -127,6 +139,7 @@
                         android:layout_marginRight="16dp"
                         android:background="@drawable/pre_next_slide_background"
                         android:fontFamily="@font/fonticon"
+                        android:onClick="@{()->event.nextSlide()}"
                         android:text="\ue907"
                         android:textColor="#fff"
                         android:textSize="24sp"
@@ -139,8 +152,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/fonticon"
-                        android:padding="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingVertical="16dp"
+                        android:paddingEnd="8dp"
                         android:text="\ue922"
+                        android:textSize="16sp"
                         android:textColor="#343434"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -149,20 +165,22 @@
 
                     <TextView
                         android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="360 Kim Max, Ngoc khganh"
+                        android:text="@{hoteldetails.address}"
+                        android:textSize="14sp"
                         android:textColor="#343434"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/tv_city"
                         app:layout_constraintStart_toEndOf="@+id/place_icon"
+                        app:layout_constraintEnd_toStartOf="@id/show_map"
                         app:layout_constraintTop_toTopOf="@id/place_icon" />
 
                     <TextView
                         android:id="@+id/tv_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ba Dinh, Ha noi"
+                        android:text="@{hoteldetails.address1}"
                         android:textSize="12sp"
                         android:textStyle="italic"
                         app:layout_constraintBottom_toBottomOf="@id/place_icon"
@@ -178,6 +196,7 @@
                         android:background="@drawable/bg_transperen_roundborder"
                         android:orientation="horizontal"
                         android:padding="8dp"
+                        android:onClick="@{()->event.showMap()}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/vp_slider">
 
@@ -209,16 +228,18 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()->event.showReview()}"
                     android:paddingVertical="8dp">
 
                     <TextView
                         android:id="@+id/tv_review"
-                        flexBackground="@{9.3f}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/review_point_background"
                         android:padding="10dp"
-                        android:text="9.3"
+                        android:text='@{hoteldetails.reviewPoint+""}'
+                        flexBackground="@{hoteldetails.reviewPoint}"
+                        android:visibility="@{hoteldetails.reviewPoint==0?View.GONE:View.VISIBLE}"
                         android:textAlignment="center"
                         android:textColor="#fff"
                         android:textStyle="bold"
@@ -231,9 +252,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:text="Tuyệt hảo"
-                        android:textColor="@color/main"
+                        android:layout_marginStart="8dp"
+                        textColor="@{hoteldetails.reviewPoint}"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@id/tv_review"
                         app:layout_constraintStart_toEndOf="@id/tv_review"
@@ -331,11 +351,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:layout_marginBottom="4dp"
                     android:background="#fff"
                     android:elevation="3dp"
                     android:onClick="@{()->viewmodel.tienNghiVisibilityChange()}"
-                    android:layout_marginTop="32dp"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
@@ -361,18 +381,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
-                    android:paddingVertical="8dp"
                     android:paddingHorizontal="16dp"
-                    android:text="1"
-                    android:visibility="@{viewmodel.isTienNghiShow?View.VISIBLE:View.GONE}"/>
+                    android:paddingVertical="8dp"
+                    android:text="@{hoteldetails.tiennghi}"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:visibility="@{viewmodel.isTienNghiShow?View.VISIBLE:View.GONE}" />
 
                 <LinearLayout
-                    android:onClick="@{()->viewmodel.moTaVisibilityChange()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:background="#fff"
                     android:elevation="3dp"
+                    android:onClick="@{()->viewmodel.moTaVisibilityChange()}"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp">
@@ -397,17 +419,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
-                    android:paddingVertical="8dp"
+                    mota="@{hoteldetails.mota}"
                     android:paddingHorizontal="16dp"
-                    android:text="1"
-                    android:visibility="@{viewmodel.isMoTaShow?View.VISIBLE:View.GONE}"/>
+                    android:paddingVertical="8dp"
+                    android:visibility="@{viewmodel.isMoTaShow?View.VISIBLE:View.GONE}" />
+
                 <LinearLayout
-                    android:onClick="@{()->viewmodel.chinhSachVisibilityChange()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:background="#fff"
                     android:elevation="3dp"
+                    android:onClick="@{()->viewmodel.chinhSachVisibilityChange()}"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp">
@@ -431,12 +454,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:paddingVertical="8dp"
-                    android:paddingHorizontal="16dp"
                     android:layout_marginBottom="48dp"
-                    android:text="1"
-                    android:visibility="@{viewmodel.isChinhSachShow?View.VISIBLE:View.GONE}"/>
+                    android:background="#fff"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:visibility="@{viewmodel.isChinhSachShow?View.VISIBLE:View.GONE}" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

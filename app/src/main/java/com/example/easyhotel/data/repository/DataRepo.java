@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.easyhotel.data.model.Hotel;
+import com.example.easyhotel.data.model.hoteldetails.HotelDetails;
 import com.example.easyhotel.data.model.searchresult.SearchResult;
 import com.example.easyhotel.data.remote.RetrofitClient;
 import com.example.easyhotel.data.remote.SearchService;
@@ -19,6 +20,7 @@ import retrofit2.Response;
 public class DataRepo {
     private MutableLiveData<SearchResult> searchResultMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Hotel>> hotes = new MutableLiveData<>();
+    private MutableLiveData<HotelDetails> hotelDetails = new MutableLiveData<>();
     private final SearchService service = RetrofitClient.getClient();
 
     public MutableLiveData<SearchResult> getSearchResult(String keyword) {
@@ -43,15 +45,30 @@ public class DataRepo {
             @Override
             public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
                 hotes.setValue(response.body());
-                Log.d("ccc","ccc12");
             }
 
             @Override
             public void onFailure(Call<List<Hotel>> call, Throwable t) {
                 t.printStackTrace();
-                Log.d("ccc","ccc1");
             }
         });
         return hotes;
     }
+
+    public MutableLiveData<HotelDetails> getHotelDetails(int hotelId) {
+        service.getDetailsHotel(hotelId).enqueue(new Callback<List<HotelDetails>>() {
+            @Override
+            public void onResponse(Call<List<HotelDetails>> call, Response<List<HotelDetails>> response) {
+                hotelDetails.setValue(response.body().get(0));
+            }
+
+            @Override
+            public void onFailure(Call<List<HotelDetails>> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("ccc","f");
+            }
+        });
+        return hotelDetails;
+    }
+
 }

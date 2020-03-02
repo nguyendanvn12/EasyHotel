@@ -66,8 +66,6 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         Uri uri = Uri.parse(tel);
         Intent intent = new Intent(Intent.ACTION_CALL, uri);
         if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    Activity#requestPermissions
             ActivityCompat.requestPermissions(ListHotelActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
             return;
         } else {
@@ -83,12 +81,12 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
 
     @Override
     public void openLoc() {
-
+        //todo filter hotel
     }
 
     @Override
     public void openMap() {
-
+        //todo open Hotels location in Map;
     }
 
     private long mLastClickTime = 0;
@@ -101,6 +99,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         }
         mLastClickTime = SystemClock.elapsedRealtime();
         Intent intent = new Intent(ListHotelActivity.this, DetailsHotelActivity.class);
+        intent.putExtra("hotelId",hotelId);
         startActivity(intent);
     }
 }

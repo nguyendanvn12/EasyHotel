@@ -2,35 +2,21 @@ package com.example.easyhotel.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.example.easyhotel.R;
 import com.example.easyhotel.databinding.RoomImgSliderBinding;
+import java.util.List;
 
-import java.util.ArrayList;
-
-public class RoomImgViewpagerAdapter extends RecyclerView.Adapter<RoomImgViewpagerAdapter.ViewHolder> {
-    private ArrayList<Integer> imgs;
+public class HotelImgViewpagerAdapter extends RecyclerView.Adapter<HotelImgViewpagerAdapter.ViewHolder> {
+    private List<String> imgs;
     private Context context;
-    public RoomImgViewpagerAdapter() {
-        this.imgs = new ArrayList<>();
-        imgs.add(R.drawable.jeju);
-        imgs.add(R.drawable.du);
-        imgs.add(R.drawable.hoian);
-        imgs.add(R.drawable.kur);
-        imgs.add(R.drawable.sing);
-        imgs.add(R.drawable.background1);
-        imgs.add(R.drawable.background2);
-        imgs.add(R.drawable.background3);
-        imgs.add(R.drawable.background4);
-        imgs.add(R.drawable.background5);
+    private StringBuilder url = new StringBuilder("http://10.1.42.83/hotel/resource/hotel/");
+    public void setImgs(List<String> imgs, String  hotelName) {
+        this.imgs = imgs;
+        notifyDataSetChanged();
+        url.append(hotelName).append("/imgs/");
     }
 
     @NonNull
@@ -43,7 +29,7 @@ public class RoomImgViewpagerAdapter extends RecyclerView.Adapter<RoomImgViewpag
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).load(imgs.get(position))
+        Glide.with(context).load(url.toString()+imgs.get(position))
                 .centerCrop().into(holder.binding.imageViewID);
     }
 

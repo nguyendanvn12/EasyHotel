@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "525386219653",
+    "firebase_url": "https://easyhotel-c5358.firebaseio.com",
+    "project_id": "easyhotel-c5358",
+    "storage_bucket": "easyhotel-c5358.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525386219653:android:7ebcd4370a75ffa4aaa9ec",
+        "android_client_info": {
+          "package_name": "com.example.easyhotel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525386219653-bh8j7e7fhtibiff5kcq55cd9ck3licnk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easyhotel",
+            "certificate_hash": "b13ed74361e3f8fe99233bf756f277f2ece5793d"
+          }
+        },
+        {
+          "client_id": "525386219653-ujfrpen974ba8prorjqfq1n15h01c03a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXSrrFD3cg-JCLnS5NNO1AdgZCbbdyTuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525386219653-ujfrpen974ba8prorjqfq1n15h01c03a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

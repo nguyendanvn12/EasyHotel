@@ -1,14 +1,13 @@
 
-package com.example.easyhotel.data.model;
+package com.example.easyhotel.data.model.hoteldetails;
 
-import android.content.Intent;
+import android.util.Log;
 
-import java.nio.channels.FileLockInterruptionException;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Hotel {
+public class HotelDetails {
 
     @SerializedName("hotel_id")
     @Expose
@@ -25,6 +24,9 @@ public class Hotel {
     @SerializedName("address")
     @Expose
     private String address;
+    @SerializedName("address1")
+    @Expose
+    private String address1;
     @SerializedName("city_id")
     @Expose
     private Integer cityId;
@@ -34,18 +36,30 @@ public class Hotel {
     @SerializedName("country_id")
     @Expose
     private Integer countryId;
-    @SerializedName("thumb")
+    @SerializedName("imgs")
     @Expose
-    private String thumb;
+    private List<String> imgs = null;
     @SerializedName("origin_price")
     @Expose
-    private Integer originPrice;
+    private String originPrice;
     @SerializedName("sale_price")
     @Expose
     private Integer salePrice;
     @SerializedName("discount")
     @Expose
     private Integer discount;
+    @SerializedName("tiennghi")
+    @Expose
+    private String tiennghi;
+    @SerializedName("mota")
+    @Expose
+    private String mota;
+    @SerializedName("check_in_time")
+    @Expose
+    private String checkInTime;
+    @SerializedName("check_out_time")
+    @Expose
+    private String checkOutTime;
 
     public Integer getHotelId() {
         return hotelId;
@@ -63,6 +77,79 @@ public class Hotel {
         this.hotelName = hotelName;
     }
 
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
+    public Integer getCityId() {
+        return cityId;
+    }
+
+
+    public List<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
+    }
+
+    public String getOriginPrice() {
+        return originPrice;
+    }
+
+    public void setOriginPrice(String originPrice) {
+        this.originPrice = originPrice;
+    }
+
+
+
+    public String getTiennghi() {
+        return tiennghi;
+    }
+
+    public void setTiennghi(String tiennghi) {
+        this.tiennghi = tiennghi;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+
+    public String getCheckInTime() {
+        return checkInTime;
+    }
+
+    public void setCheckInTime(String checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+
+    public String getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(String checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
+
     public Integer getStar() {
         return star;
     }
@@ -77,17 +164,6 @@ public class Hotel {
 
     public void setReviewPoint(Float reviewPoint) {
         this.reviewPoint = reviewPoint;
-    }
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Integer getCityId() {
-        return cityId;
     }
 
     public void setCityId(Integer cityId) {
@@ -108,22 +184,6 @@ public class Hotel {
 
     public void setCountryId(Integer countryId) {
         this.countryId = countryId;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-    
-    public Integer getOriginPrice() {
-        return originPrice;
-    }
-
-    public void setOriginPrice(Integer originPrice) {
-        this.originPrice = originPrice;
     }
 
     public Integer getSalePrice() {
