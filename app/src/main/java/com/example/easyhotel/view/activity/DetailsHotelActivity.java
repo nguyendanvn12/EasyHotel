@@ -12,7 +12,9 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -37,9 +39,11 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
     private  HotelImgViewpagerAdapter imgAdapter;
     private int hotelId;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details_hotel);
         detailsHotelViewModel = new ViewModelProvider(this).get(DetailsHotelViewModel.class);
         imgAdapter = new HotelImgViewpagerAdapter();

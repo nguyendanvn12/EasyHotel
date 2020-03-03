@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:elevation="3dp"
         android:background="#fff"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
 
         <ImageView
             android:id="@+id/iv_room_thumb"
@@ -26,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="1 giường cỡ xxx"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bed_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
             app:layout_constraintTop_toTopOf="@+id/tv_bed_icon" />
@@ -87,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="1 giường cỡ xxx"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_area_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
             app:layout_constraintTop_toTopOf="@+id/tv_area_icon" />
@@ -107,13 +111,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/fonticon"
-            android:text="\ue932"
+            android:text="\ue90f"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="#333"
+            app:layout_constraintBottom_toBottomOf="@id/tv_discount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
+            app:layout_constraintTop_toTopOf="@id/tv_discount"
             app:layout_constraintVertical_bias="0" />
 
         <TextView
@@ -122,6 +127,7 @@
             android:layout_marginStart="2dp"
             android:text="Huỷ phòng: Không hoàn huỷ"
             android:textSize="12sp"
+            android:textColor="#333"
             app:layout_constraintBottom_toBottomOf="@+id/tv_refund_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_refund_icon"
             app:layout_constraintTop_toTopOf="@+id/tv_refund_icon" />
@@ -132,13 +138,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/fonticon"
-            android:text="\ue932"
+            android:text="\ue910"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="#333"
+            app:layout_constraintBottom_toBottomOf="@id/sale_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_refund_icon"
+            app:layout_constraintTop_toTopOf="@id/sale_price"
             app:layout_constraintVertical_bias="0" />
 
         <TextView
@@ -147,6 +154,7 @@
             android:layout_marginStart="2dp"
             android:text="Bữa ăn: Bao gồm bữa ăn sáng"
             android:textSize="12sp"
+            android:textColor="#333"
             app:layout_constraintBottom_toBottomOf="@+id/tv_breakfast_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_breakfast_icon"
             app:layout_constraintTop_toTopOf="@+id/tv_breakfast_icon" />
@@ -157,7 +165,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#c70000"
-            android:fontFamily="@font/ivy_title"
             android:padding="4dp"
             android:text="12% off"
             android:textColor="#fff"
@@ -205,7 +212,7 @@
             android:id="@+id/text_suc_chua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:text="Sức chứa: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_breakfast_icon" />
@@ -214,8 +221,9 @@
             android:id="@+id/tv_suc_chua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#efefef"
+            android:background="#ababab"
             android:text="2"
+            android:layout_marginStart="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/text_suc_chua"
             app:layout_constraintStart_toEndOf="@+id/text_suc_chua"
             app:layout_constraintTop_toTopOf="@+id/text_suc_chua" />
@@ -225,10 +233,23 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/fa_regular_400"
             android:text="\uf007"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_suc_chua"
             app:layout_constraintStart_toEndOf="@+id/tv_suc_chua"
             app:layout_constraintTop_toTopOf="@+id/tv_suc_chua" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/search_background_btn"
+            android:textAllCaps="false"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:text="Đặt phòng"
+            android:textColor="#fff"
+            app:layout_constraintTop_toTopOf="@id/text_suc_chua"
+            app:layout_constraintBottom_toBottomOf="@id/text_suc_chua"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

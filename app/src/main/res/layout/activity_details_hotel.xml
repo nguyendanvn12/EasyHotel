@@ -346,7 +346,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_room_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="#efefef"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -458,6 +459,7 @@
                     android:background="#fff"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:text="@{@string/chinhsach(hoteldetails.checkInTime,hoteldetails.checkOutTime)}"
                     android:visibility="@{viewmodel.isChinhSachShow?View.VISIBLE:View.GONE}" />
 
             </LinearLayout>

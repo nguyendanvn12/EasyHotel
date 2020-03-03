@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,9 +31,11 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
     private ListHotelAdapter adapter;
     private ListHotelViewModel viewModel;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_hotel);
         viewModel = new ViewModelProvider(this).get(ListHotelViewModel.class);
         adapter = new ListHotelAdapter();
