@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.easyhotel.R;
 
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ public class MainBackgroundAdapter extends androidx.viewpager.widget.PagerAdapte
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ImageView imageView = new ImageView(container.getContext());
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         int pos = position%imgs.size();
-        imageView.setImageResource(imgs.get(pos));
+        Glide.with(container.getContext()).load(imgs.get(pos))
+                .centerCrop().into(imageView);
         container.addView(imageView);
         return imageView;
     }

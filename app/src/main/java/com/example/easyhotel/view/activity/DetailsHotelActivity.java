@@ -118,11 +118,21 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
 
     @Override
     public void preSlide() {
+       int i =  binding.vpSlider.getCurrentItem();
+       try {
+           binding.vpSlider.setCurrentItem(i-1,true);
+       }catch (Exception ex){
 
+       }
     }
 
     @Override
     public void nextSlide() {
+        int i =  binding.vpSlider.getCurrentItem();
+        try {
+            binding.vpSlider.setCurrentItem(i+1,true);
+        }catch (Exception ex){
 
+        }
     }
 }
