@@ -46,19 +46,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             placeBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_search_place, parent, false);
             placeBinding.setEvent(event);
             return new ViewHolder(placeBinding);
-        } else if(viewType==2){
+        } else if (viewType == 2) {
             hotelBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_search_hotel, parent, false);
             hotelBinding.setEvent(event);
             return new ViewHolder(hotelBinding);
         }
-            headerBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_header, parent, false);
-            return new ViewHolder(headerBinding);
+        headerBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_header, parent, false);
+        return new ViewHolder(headerBinding);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        switch (getItemViewType(position)){
+        switch (getItemViewType(position)) {
             case 0:
                 break;
             case 1:
@@ -66,8 +66,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 holder.placeBinding.executePendingBindings();
                 break;
             case 2:
-            holder.hotelBinding.setData(datas.get(position));
-            holder.hotelBinding.executePendingBindings();
+                holder.hotelBinding.setData(datas.get(position));
+                holder.hotelBinding.executePendingBindings();
                 break;
             default:
                 holder.headerBinding.setData(datas.get(position));
@@ -86,10 +86,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-         ItemSearchHotelBinding hotelBinding;
-         ItemSearchPlaceBinding placeBinding;
-         ItemHeaderBinding headerBinding;
-         ItemGpsBinding gpsBinding;
+        private ItemSearchHotelBinding hotelBinding;
+        private ItemSearchPlaceBinding placeBinding;
+        private ItemHeaderBinding headerBinding;
+        private ItemGpsBinding gpsBinding;
 
         public ViewHolder(@NonNull ItemSearchPlaceBinding placeBinding) {
             super(placeBinding.getRoot());

@@ -103,7 +103,7 @@ public class SearchFragment extends Fragment {
 
         ArrayList<SearchModel> famous = new ArrayList<>();
         famous.add(new SearchModel(1, 1, "Hà Nội"));
-        famous.add(new SearchModel(1, 2, "Hồ Chí Minh"));
+        famous.add(new SearchModel(1, 79, "Hồ Chí Minh"));
         mSearchModels.add(new SearchModel(0));
         if (history.size() > 0) {
             mSearchModels.add(new SearchModel(3, "Tìm kiếm gần đây"));

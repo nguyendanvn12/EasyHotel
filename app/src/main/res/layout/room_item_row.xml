@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="android.text.Html" />
-
+        <variable
+            name="room" type="com.example.easyhotel.data.model.roominfo.Room"/>
         <import type="com.example.easyhotel.data.converter.DataConverter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="3dp"
@@ -22,7 +22,6 @@
             android:id="@+id/iv_room_thumb"
             android:layout_width="90dp"
             android:layout_height="75dp"
-            android:src="@drawable/background3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -35,7 +34,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingVertical="2dp"
-            android:text="Deluxe fnds"
+            android:text="@{room.roomName}"
             android:textColor="#1C90FE"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -64,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="1 giường cỡ xxx"
+            bed="@{room.bed}"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bed_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
@@ -89,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="1 giường cỡ xxx"
+            android:text="@{room.roomSize+` m2`}"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_area_icon"
             app:layout_constraintStart_toEndOf="@+id/tv_bed_icon"
@@ -109,23 +108,21 @@
             android:id="@+id/tv_refund_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/fonticon"
             android:text="\ue90f"
             android:textSize="12sp"
             android:textColor="#333"
-            app:layout_constraintBottom_toBottomOf="@id/tv_discount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_discount"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toBottomOf="@id/view1" />
 
         <TextView
+            android:id="@+id/tv_refund"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:text="Huỷ phòng: Không hoàn huỷ"
             android:textSize="12sp"
             android:textColor="#333"
             app:layout_constraintBottom_toBottomOf="@+id/tv_refund_icon"
@@ -136,19 +133,18 @@
             android:id="@+id/tv_breakfast_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/fonticon"
             android:text="\ue910"
             android:textSize="12sp"
             android:textColor="#333"
-            app:layout_constraintBottom_toBottomOf="@id/sale_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/sale_price"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toBottomOf="@id/tv_refund_icon" />
 
         <TextView
+            android:id="@+id/tv_breakfast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -166,23 +162,19 @@
             android:layout_marginTop="8dp"
             android:background="#c70000"
             android:padding="4dp"
-            android:text="12% off"
             android:textColor="#fff"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_refund_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toTopOf="@id/tv_refund_icon" />
 
         <TextView
             android:id="@+id/tv_origin_price"
-            hideIfZero="@{1}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:text='@{Html.fromHtml("&lt;strike>"+DataConverter.currency(1000000)+"&lt;/strike>")}'
             app:layout_constraintBottom_toBottomOf="@id/tv_discount"
             app:layout_constraintEnd_toStartOf="@+id/tv_discount"
             app:layout_constraintHorizontal_bias="1"
@@ -190,15 +182,13 @@
             app:layout_constraintTop_toTopOf="@+id/tv_discount" />
 
         <TextView
-            android:id="@+id/sale_price"
+            android:id="@+id/tv_sale_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{Html.fromHtml("&lt;span style=\"color:#5a8a0d;\">&lt;big>"+DataConverter.currency(12000000)+"&lt;/big>&lt;/span> /đêm")}'
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_breakfast_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintTop_toBottomOf="@id/tv_discount"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toTopOf="@id/tv_breakfast_icon"  />
 
         <View
             android:layout_width="match_parent"
@@ -222,7 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ababab"
-            android:text="2"
+            android:text="@{room.roomCapacity+``}"
             android:layout_marginStart="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/text_suc_chua"
             app:layout_constraintStart_toEndOf="@+id/text_suc_chua"
@@ -239,6 +229,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_suc_chua" />
 
         <Button
+            android:id="@+id/btn_book"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:background="@drawable/search_background_btn"

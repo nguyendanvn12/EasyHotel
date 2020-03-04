@@ -1,7 +1,6 @@
 package com.example.easyhotel.view.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -17,7 +16,7 @@ import com.example.easyhotel.view.ListHotelEvent;
 
 import java.util.List;
 
-public class ListHotelAdapter extends RecyclerView.Adapter {
+public class ListHotelAdapter extends RecyclerView.Adapter<ListHotelAdapter.ViewHolder> {
     private List<Hotel> hotels;
     private HotelItemListBinding binding;
     private Context context;
@@ -34,24 +33,25 @@ public class ListHotelAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.hotel_item_list,parent,false);
         return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Hotel hotel =hotels.get(position);
         binding.setData(hotel);
         binding.setEvent(event);
-        StringBuilder url = new StringBuilder("http://10.0.0.15/hotel/resource/hotel/");
+        StringBuilder url = new StringBuilder("http://10.1.42.83/hotel/resource/hotel/");
         url.append(hotel.getHotelName()).append("/thumb/").append(hotel.getThumb());
         Glide.with(context)
                 .load(url.toString())
                 .centerCrop()
-                .into(binding.imageView3);
+                .into(holder.binding.imageView3);
     }
+
 
     @Override
     public int getItemCount() {

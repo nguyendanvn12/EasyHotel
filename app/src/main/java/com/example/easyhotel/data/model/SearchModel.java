@@ -1,6 +1,8 @@
 package com.example.easyhotel.data.model;
 
-public class SearchModel {
+import java.io.Serializable;
+
+public class SearchModel implements Serializable {
     private int type;
     private int id;
     private String title;
@@ -52,4 +54,11 @@ public class SearchModel {
         this.title = title;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

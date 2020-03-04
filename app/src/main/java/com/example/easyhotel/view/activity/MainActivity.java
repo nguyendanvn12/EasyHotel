@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity implements Event {
     private ActivityMainBinding mBinding;
     private MainBackgroundAdapter mMainBackgroundAdapter;
     private int curren = Integer.MAX_VALUE / 2 + 1;
-private FragmentManager fragmentManager;
-private MainViewModel viewModel;
+    private FragmentManager fragmentManager;
+    private MainViewModel viewModel;
+    private SearchModel location;
+
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +61,9 @@ private MainViewModel viewModel;
         final Runnable update = new Runnable() {
             @Override
             public void run() {
-            curren = mBinding.background.getCurrentItem();
-            ++curren;
-            mBinding.background.setCurrentItem(curren,true);
+                curren = mBinding.background.getCurrentItem();
+                ++curren;
+                mBinding.background.setCurrentItem(curren, true);
             }
         };
 
@@ -69,14 +71,16 @@ private MainViewModel viewModel;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-handler.post(update);
+                handler.post(update);
             }
-        },4000,2000);
+        }, 4000, 2000);
         fragmentManager = getSupportFragmentManager();
 
 
     }
+
     private long mLastClickTime = 0;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -96,7 +100,7 @@ handler.post(update);
         mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         SearchFragment searchFragment = new SearchFragment();
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,searchFragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up, R.anim.slide_in_down, R.anim.slide_out_down, R.anim.slide_out_up).replace(R.id.main_container, searchFragment).addToBackStack(null).commit();
     }
 
     @Override
@@ -107,7 +111,7 @@ handler.post(update);
         mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         PickCheckInDateFragment fragment = new PickCheckInDateFragment();
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.main_container,fragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up, R.anim.slide_in_down, R.anim.slide_out_down, R.anim.slide_out_up).replace(R.id.main_container, fragment).addToBackStack(null).commit();
     }
 
 
@@ -119,19 +123,29 @@ handler.post(update);
         mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         BottomSheetDurationFragment fragment = new BottomSheetDurationFragment();
-        fragment.show(fragmentManager,fragment.getTag());
+        fragment.show(fragmentManager, fragment.getTag());
     }
 
     @Override
     public void onSearchClick() {
         Intent intent = new Intent(MainActivity.this, ListHotelActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left,R.anim.hold);
+        long checkin = viewModel.date.getValue().getTime();
+        int duration = viewModel.duration.getValue();
+       if(location!=null){
+           intent.putExtra("checkin", checkin);
+           intent.putExtra("duration", duration);
+           intent.putExtra("location",location);
+           startActivity(intent);
+       }else {
+           //todo load GPS
+       }
+        overridePendingTransition(R.anim.slide_in_left, R.anim.hold);
     }
 
     @Override
     public void itemPlaceClick(SearchModel model) {
         viewModel.set_keyword(model.getTitle());
+        location = model;
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         onBackPressed();
@@ -146,7 +160,6 @@ handler.post(update);
     public void itemGPSClick() {
 
     }
-
 
 
     @Override

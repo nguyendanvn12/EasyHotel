@@ -45,8 +45,8 @@ public class MainBackgroundAdapter extends androidx.viewpager.widget.PagerAdapte
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ImageView imageView = new ImageView(container.getContext());
         int pos = position%imgs.size();
-        Glide.with(container.getContext()).load(imgs.get(pos))
-                .centerCrop().into(imageView);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageResource(imgs.get(pos));
         container.addView(imageView);
         return imageView;
     }

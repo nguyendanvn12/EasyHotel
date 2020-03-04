@@ -19,6 +19,7 @@ import android.util.Log;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.Hotel;
+import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityListHotelBinding;
 import com.example.easyhotel.view.ListHotelEvent;
 import com.example.easyhotel.view.adapter.ListHotelAdapter;
@@ -30,7 +31,9 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
     private ActivityListHotelBinding binding;
     private ListHotelAdapter adapter;
     private ListHotelViewModel viewModel;
-
+    private long checkIn;
+    private int duration;
+    private SearchModel location;
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,20 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         binding.rvListHotel.setAdapter(adapter);
         binding.rvListHotel.setLayoutManager(new LinearLayoutManager(this));
         binding.setEvent(this);
-        int id = 1;
-
-        viewModel.getListHotel(id, null, null, null, null, null).observe(this, new Observer<List<Hotel>>() {
+        checkIn= getIntent().getLongExtra("checkin",System.currentTimeMillis());
+        duration = getIntent().getIntExtra("duration",1);
+        location = (SearchModel) getIntent().getSerializableExtra("location");
+        binding.setLocation(location);
+        binding.setCheckin(checkIn);
+        binding.setDuration(duration);
+        viewModel.getListHotel(location.getId(), null, null, null, null, null).observe(this, new Observer<List<Hotel>>() {
             @Override
             public void onChanged(List<Hotel> hotels) {
                 adapter.setHotels(hotels);
             }
         });
+
+
     }
 
     @Override
@@ -101,9 +110,12 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return;
         }
+
         mLastClickTime = SystemClock.elapsedRealtime();
         Intent intent = new Intent(ListHotelActivity.this, DetailsHotelActivity.class);
         intent.putExtra("hotelId",hotelId);
+        intent.putExtra("duration",duration);
+        intent.putExtra("checkin",checkIn);
         startActivity(intent);
     }
 }

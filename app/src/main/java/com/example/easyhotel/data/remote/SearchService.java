@@ -2,6 +2,7 @@ package com.example.easyhotel.data.remote;
 
 import com.example.easyhotel.data.model.Hotel;
 import com.example.easyhotel.data.model.hoteldetails.HotelDetails;
+import com.example.easyhotel.data.model.roominfo.Room;
 import com.example.easyhotel.data.model.searchresult.SearchResult;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface SearchService {
                             @Query("star")Integer star);
     @GET("details-hotel")
     Call<List<HotelDetails>> getDetailsHotel(@Query("hotel_id")Integer hotel_id);
+
+    @GET("room-avaibility")
+    Call<List<Room>> getRoomAvaibility(@Query("hotel_id")Integer hotelId);
 }

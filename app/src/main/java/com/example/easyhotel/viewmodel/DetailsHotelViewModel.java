@@ -6,12 +6,18 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.easyhotel.data.model.hoteldetails.HotelDetails;
 import com.example.easyhotel.data.repository.DataRepo;
+import com.example.easyhotel.data.repository.HotelRePo;
 
 public class DetailsHotelViewModel extends ViewModel {
     private MutableLiveData<Boolean> _isTienNghiShow = new MutableLiveData<Boolean>(false);
     private MutableLiveData<Boolean> _isMoTaShow = new MutableLiveData<Boolean>(false);
     private MutableLiveData<Boolean> _isChinhSachShow = new MutableLiveData<Boolean>(false);
-    private DataRepo dataRepo = new DataRepo();
+    private MutableLiveData<Long> checkIndate = new MutableLiveData<>();
+    private MutableLiveData<Integer> duration = new MutableLiveData<>();
+
+
+
+    private HotelRePo dataRepo = new HotelRePo();
     private MutableLiveData<HotelDetails> hotelDetails = new MutableLiveData<>();
 
     public LiveData<HotelDetails> getHotelDetails(int hotelId) {

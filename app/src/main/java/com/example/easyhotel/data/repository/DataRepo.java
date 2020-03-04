@@ -19,8 +19,6 @@ import retrofit2.Response;
 
 public class DataRepo {
     private MutableLiveData<SearchResult> searchResultMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<Hotel>> hotes = new MutableLiveData<>();
-    private MutableLiveData<HotelDetails> hotelDetails = new MutableLiveData<>();
     private final SearchService service = RetrofitClient.getClient();
 
     public MutableLiveData<SearchResult> getSearchResult(String keyword) {
@@ -40,35 +38,6 @@ public class DataRepo {
         return searchResultMutableLiveData;
     }
 
-    public MutableLiveData<List<Hotel>> getListHotel(@Nullable Integer stateId, @Nullable Integer cityId, @Nullable Integer pages, @Nullable Integer min, @Nullable Integer max, @Nullable Integer star) {
-        service.getListHotel(stateId, cityId, pages, min, max, star).enqueue(new Callback<List<Hotel>>() {
-            @Override
-            public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
-                hotes.setValue(response.body());
-            }
 
-            @Override
-            public void onFailure(Call<List<Hotel>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-        return hotes;
-    }
-
-    public MutableLiveData<HotelDetails> getHotelDetails(int hotelId) {
-        service.getDetailsHotel(hotelId).enqueue(new Callback<List<HotelDetails>>() {
-            @Override
-            public void onResponse(Call<List<HotelDetails>> call, Response<List<HotelDetails>> response) {
-                hotelDetails.setValue(response.body().get(0));
-            }
-
-            @Override
-            public void onFailure(Call<List<HotelDetails>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("ccc","f");
-            }
-        });
-        return hotelDetails;
-    }
 
 }

@@ -19,9 +19,13 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.easyhotel.R;
+import com.example.easyhotel.data.model.roominfo.Bed;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BindingAdapter {
     @androidx.databinding.BindingAdapter("flexBackground")
@@ -98,6 +102,32 @@ public class BindingAdapter {
             } else {
                 view.setText(Html.fromHtml(x));
             }
+        }
+    }
+    @androidx.databinding.BindingAdapter("bed")
+    public static void setBed(TextView textView, List<Bed> beds){
+        String s = "";
+        for (Bed bed:beds
+             ) {
+            if(s.length()!=0){
+                s+=" | ";
+            }
+            s+=bed.getRoomBedCount()+" ";
+            s+=bed.getRoomBedName();
+        }
+        textView.setText(s);
+    }
+    @androidx.databinding.BindingAdapter(value = {"checkin","duration"},requireAll = true)
+    public static void setRentDuration(TextView view,long checkIn,int duration){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        try {
+            Date checkInd = new Date(checkIn);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(checkInd);
+            calendar.add(Calendar.DATE,duration);
+            view.setText(duration+" đêm( "+dateFormat.format(checkInd)+"-"+dateFormat.format(calendar.getTime())+")");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

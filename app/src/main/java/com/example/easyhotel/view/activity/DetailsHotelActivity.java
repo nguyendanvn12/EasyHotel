@@ -24,20 +24,27 @@ import android.view.View;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.hoteldetails.HotelDetails;
+import com.example.easyhotel.data.model.roominfo.Room;
 import com.example.easyhotel.databinding.ActivityDetailsHotelBinding;
 import com.example.easyhotel.view.DetailsHotelEvent;
+import com.example.easyhotel.view.PickRoom;
 import com.example.easyhotel.view.adapter.HotelImgViewpagerAdapter;
 import com.example.easyhotel.view.adapter.ListRoomAdapter;
 import com.example.easyhotel.viewmodel.DetailsHotelViewModel;
+import com.example.easyhotel.viewmodel.RoomViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DetailsHotelActivity extends AppCompatActivity implements DetailsHotelEvent {
+public class DetailsHotelActivity extends AppCompatActivity implements DetailsHotelEvent, PickRoom {
     private ActivityDetailsHotelBinding binding;
     private DetailsHotelViewModel detailsHotelViewModel;
     private ListRoomAdapter roomAdapter;
     private  HotelImgViewpagerAdapter imgAdapter;
     private int hotelId;
+    private RoomViewModel roomViewModel;
+    private long checkInDate;
+    private int duration;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -46,9 +53,13 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details_hotel);
         detailsHotelViewModel = new ViewModelProvider(this).get(DetailsHotelViewModel.class);
+        roomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
         imgAdapter = new HotelImgViewpagerAdapter();
         binding.setLifecycleOwner(this);
         binding.setViewmodel(detailsHotelViewModel);
+        checkInDate = getIntent().getLongExtra("checkin",System.currentTimeMillis());
+        duration = getIntent().getIntExtra("duration",1);
+
         binding.vpSlider.setAdapter(imgAdapter);
         binding.vpSlider.setPageTransformer(new ViewPager2.PageTransformer() {
             @Override
@@ -80,6 +91,13 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
                 binding.setHoteldetails(hotelDetails);
             }
         });
+        roomViewModel.getRooms(hotelId).observe(this, new Observer<List<Room>>() {
+            @Override
+            public void onChanged(List<Room> rooms) {
+                roomAdapter.setRooms(rooms);
+            }
+        });
+        roomAdapter.setEvent(this);
     }
 
     @Override
@@ -134,5 +152,15 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         }catch (Exception ex){
 
         }
+    }
+
+    @Override
+    public void book(int room, int rate) {
+        Log.d("ccc", "book: ");
+    }
+
+    @Override
+    public void details(int room, int rate) {
+        Log.d("ccc", "details: ");
     }
 }
