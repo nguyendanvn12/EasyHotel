@@ -59,7 +59,8 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         binding.setViewmodel(detailsHotelViewModel);
         checkInDate = getIntent().getLongExtra("checkin",System.currentTimeMillis());
         duration = getIntent().getIntExtra("duration",1);
-
+        detailsHotelViewModel.setcheckIndate(checkInDate);
+        detailsHotelViewModel.setduration(duration);
         binding.vpSlider.setAdapter(imgAdapter);
         binding.vpSlider.setPageTransformer(new ViewPager2.PageTransformer() {
             @Override

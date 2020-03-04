@@ -10,6 +10,4 @@
     <string name="chinhsach">Nhận phòng từ: %1$s giờ\nTrả phòng đến: %2$s giờ</string>
     <string name="orifin_price">&lt;strike>%s&lt;/strike></string>
     <string name="sale">&lt;span style="color:#5a8a0d;">&lt;big>%s&lt;/big>&lt;/span> /đêm</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

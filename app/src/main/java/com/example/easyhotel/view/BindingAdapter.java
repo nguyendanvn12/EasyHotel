@@ -130,4 +130,19 @@ public class BindingAdapter {
             e.printStackTrace();
         }
     }
+    @androidx.databinding.BindingAdapter("checkindetails")
+    public static void setCheckIn(TextView view,long checkIn){
+        Date date = new Date(checkIn);
+        SimpleDateFormat format = new SimpleDateFormat("EE, dd MMM");
+        view.setText(format.format(date));
+    }
+    @androidx.databinding.BindingAdapter({"checkindetails","duration"})
+    public static void setCheckOut(TextView view, long checkIn,int duration){
+        Date date = new Date(checkIn);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(checkIn);
+        calendar.add(Calendar.DATE,duration);
+        SimpleDateFormat format = new SimpleDateFormat("EE, dd MMM");
+        view.setText(format.format(calendar.getTime())+"("+duration+" đêm)");
+    }
 }
