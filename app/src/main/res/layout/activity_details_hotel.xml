@@ -17,7 +17,10 @@
             name="hoteldetails"
             type="com.example.easyhotel.data.model.hoteldetails.HotelDetails" />
     </data>
-
+<FrameLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -229,6 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->event.showReview()}"
+                    hideIfZero="@{(int)hoteldetails.reviewPoint}"
                     android:paddingVertical="8dp">
 
                     <TextView
@@ -239,7 +243,6 @@
                         android:padding="10dp"
                         android:text='@{hoteldetails.reviewPoint+""}'
                         flexBackground="@{hoteldetails.reviewPoint}"
-                        android:visibility="@{hoteldetails.reviewPoint==0?View.GONE:View.VISIBLE}"
                         android:textAlignment="center"
                         android:textColor="#fff"
                         android:textStyle="bold"
@@ -467,4 +470,5 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+</FrameLayout>
 </layout>

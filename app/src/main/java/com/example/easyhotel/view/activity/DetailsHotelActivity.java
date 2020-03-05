@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
@@ -30,6 +33,9 @@ import com.example.easyhotel.view.DetailsHotelEvent;
 import com.example.easyhotel.view.PickRoom;
 import com.example.easyhotel.view.adapter.HotelImgViewpagerAdapter;
 import com.example.easyhotel.view.adapter.ListRoomAdapter;
+import com.example.easyhotel.view.fragment.BookingFragment;
+import com.example.easyhotel.view.fragment.DetailsRoomFragment;
+import com.example.easyhotel.view.fragment.SearchFragment;
 import com.example.easyhotel.viewmodel.DetailsHotelViewModel;
 import com.example.easyhotel.viewmodel.RoomViewModel;
 
@@ -45,6 +51,8 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
     private RoomViewModel roomViewModel;
     private long checkInDate;
     private int duration;
+    private long mLastClickTime;
+    private FragmentManager fragmentManager;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -88,7 +96,7 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         detailsHotelViewModel.getHotelDetails(hotelId).observe(this, new Observer<HotelDetails>() {
             @Override
             public void onChanged(HotelDetails hotelDetails) {
-                imgAdapter.setImgs(hotelDetails.getImgs(),hotelDetails.getHotelName());
+                imgAdapter.setImgs(hotelDetails.getImgs());
                 binding.setHoteldetails(hotelDetails);
             }
         });
@@ -99,6 +107,7 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
             }
         });
         roomAdapter.setEvent(this);
+        fragmentManager = getSupportFragmentManager();
     }
 
     @Override
@@ -157,11 +166,24 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
 
     @Override
     public void book(int room, int rate) {
-        Log.d("ccc", "book: ");
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        roomViewModel.setActiveRoom(room,rate);
+        BookingFragment fragment = new BookingFragment();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_out_right).replace(R.id.container, fragment).addToBackStack(null).commit();
+
     }
 
     @Override
     public void details(int room, int rate) {
-        Log.d("ccc", "details: ");
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        roomViewModel.setActiveRoom(room,rate);
+        DetailsRoomFragment fragment = new DetailsRoomFragment();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_out_left).replace(R.id.container, fragment).addToBackStack(null).commit();
     }
 }

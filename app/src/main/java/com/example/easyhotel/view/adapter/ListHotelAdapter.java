@@ -1,6 +1,7 @@
 package com.example.easyhotel.view.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -44,8 +45,7 @@ public class ListHotelAdapter extends RecyclerView.Adapter<ListHotelAdapter.View
         Hotel hotel =hotels.get(position);
         binding.setData(hotel);
         binding.setEvent(event);
-        StringBuilder url = new StringBuilder("http://10.0.0.15/hotel/resource/hotel/");
-        url.append(hotel.getHotelName()).append("/thumb/").append(hotel.getThumb());
+        String url = "http://10.1.42.83/hotel/resource/hotel/"+hotel.getThumb();
         Glide.with(context)
                 .load(url.toString())
                 .centerCrop()

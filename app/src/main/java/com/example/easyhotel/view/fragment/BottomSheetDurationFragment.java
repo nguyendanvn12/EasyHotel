@@ -79,9 +79,9 @@ public class BottomSheetDurationFragment extends BottomSheetDialogFragment {
     }
 
 
-    class customLayoutManager extends LinearLayoutManager {
+    static class customLayoutManager extends LinearLayoutManager {
 
-        public customLayoutManager(Context context) {
+        customLayoutManager(Context context) {
             super(context);
         }
 

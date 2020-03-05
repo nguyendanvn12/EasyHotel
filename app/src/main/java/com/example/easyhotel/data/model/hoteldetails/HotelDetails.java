@@ -39,6 +39,9 @@ public class HotelDetails {
     @SerializedName("imgs")
     @Expose
     private List<String> imgs = null;
+    @SerializedName("thumb")
+    @Expose
+    private String thumb;
     @SerializedName("origin_price")
     @Expose
     private String originPrice;
@@ -200,5 +203,12 @@ public class HotelDetails {
 
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 }

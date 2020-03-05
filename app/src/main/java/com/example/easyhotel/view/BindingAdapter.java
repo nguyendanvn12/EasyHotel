@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -117,6 +119,19 @@ public class BindingAdapter {
         }
         textView.setText(s);
     }
+    @androidx.databinding.BindingAdapter("bedDetails")
+    public static void setBed1(TextView textView, List<Bed> beds){
+        String s = "";
+        for (Bed bed:beds
+        ) {
+            if(s.length()!=0){
+                s+=" | ";
+            }
+            s+=bed.getRoomBedCount()+" ";
+            s+=bed.getRoomBedName();
+        }
+        textView.setText(Html.fromHtml(textView.getContext().getString(R.string.bed,s),Html.FROM_HTML_MODE_COMPACT));
+    }
     @androidx.databinding.BindingAdapter(value = {"checkin","duration"},requireAll = true)
     public static void setRentDuration(TextView view,long checkIn,int duration){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
@@ -144,5 +159,28 @@ public class BindingAdapter {
         calendar.add(Calendar.DATE,duration);
         SimpleDateFormat format = new SimpleDateFormat("EE, dd MMM");
         view.setText(format.format(calendar.getTime())+"("+duration+" đêm)");
+    }
+    @androidx.databinding.BindingAdapter("radioButtons")
+    public static void addRadioButtons(RadioGroup group,List<Bed> beds) {
+        RadioButton button;
+        for (Bed bed:beds
+             ) {
+            button = new RadioButton(group.getContext());
+            button.setText(bed.getRoomBedCount()+" "+bed.getRoomBedName());
+            button.setBackgroundResource(R.drawable.bg_border_rectangle);
+            RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(0,12,0,12);
+            button.setLayoutParams(lp);
+            button.setId(bed.getRoomBedId());
+            group.addView(button);
+        }
+    }
+    @androidx.databinding.BindingAdapter("date")
+    public static void setDate(TextView view,long dateL){
+        Date date = new Date(dateL);
+        SimpleDateFormat format = new SimpleDateFormat("dd MMMM");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy EEEE");
+        String text = view.getContext().getString(R.string.date,format.format(date),format1.format(date));
+        view.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT));
     }
 }
