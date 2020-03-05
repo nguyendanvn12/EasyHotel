@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.databinding.FragmentBookingBinding;
@@ -25,12 +26,24 @@ public class BookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_booking, container, false);
-        binding.setLifecycleOwner(getActivity());
-        roomViewModel = new ViewModelProvider(getActivity()).get(RoomViewModel.class);
-        hotelViewModel = new ViewModelProvider(getActivity()).get(DetailsHotelViewModel.class);
-        Log.d("ccc", "onCreateView: "+hotelViewModel.hotelDetails.getValue().getHotelName());
+        roomViewModel = new ViewModelProvider(requireActivity()).get(RoomViewModel.class);
+        hotelViewModel = new ViewModelProvider(requireActivity()).get(DetailsHotelViewModel.class);
+        binding.setLifecycleOwner(this);
         binding.setHotel(hotelViewModel);
         binding.setRoom(roomViewModel);
+        binding.rgSelectBed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                roomViewModel.selectBed(checkedId);
+            }
+        });
         return binding.getRoot();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.rgSelectBed.check(roomViewModel.bed.getValue());
     }
 }

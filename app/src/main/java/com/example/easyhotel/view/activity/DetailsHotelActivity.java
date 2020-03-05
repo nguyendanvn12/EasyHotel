@@ -172,7 +172,7 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         mLastClickTime = SystemClock.elapsedRealtime();
         roomViewModel.setActiveRoom(room,rate);
         BookingFragment fragment = new BookingFragment();
-        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_out_right).replace(R.id.container, fragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_out_left).replace(R.id.container, fragment).addToBackStack(null).commit();
 
     }
 

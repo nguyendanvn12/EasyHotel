@@ -1,6 +1,8 @@
 package com.example.easyhotel.view.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.easyhotel.R;
@@ -37,12 +40,13 @@ public class DetailsRoomFragment extends Fragment implements RoomDetailsEvent {
     private RoomViewModel roomViewModel;
     private HotelImgViewpagerAdapter adapter;
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details_room, container, false);
-        viewModel = new ViewModelProvider(getActivity()).get(DetailsHotelViewModel.class);
-        roomViewModel = new ViewModelProvider(getActivity()).get(RoomViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(DetailsHotelViewModel.class);
+        roomViewModel = new ViewModelProvider(requireActivity()).get(RoomViewModel.class);
         binding.setLifecycleOwner(this);
         binding.setRoomViewModel(roomViewModel);
         adapter = new HotelImgViewpagerAdapter();
@@ -71,13 +75,23 @@ public class DetailsRoomFragment extends Fragment implements RoomDetailsEvent {
             }
         });
         binding.setEvent(this);
+
+
+
         binding.rgSelectBed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 roomViewModel.selectBed(checkedId);
             }
         });
+
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.rgSelectBed.check(roomViewModel.bed.getValue());
     }
 
     @Override
@@ -129,7 +143,7 @@ public class DetailsRoomFragment extends Fragment implements RoomDetailsEvent {
         mLastClickTime = SystemClock.elapsedRealtime();
         BookingFragment fragment = new BookingFragment();
         try {
-            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_left, R.anim.slide_out_right).replace(R.id.container, fragment).addToBackStack(null).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_out_left).add(R.id.container, fragment).addToBackStack(null).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

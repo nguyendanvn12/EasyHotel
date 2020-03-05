@@ -163,16 +163,20 @@ public class BindingAdapter {
     @androidx.databinding.BindingAdapter("radioButtons")
     public static void addRadioButtons(RadioGroup group,List<Bed> beds) {
         RadioButton button;
-        for (Bed bed:beds
-             ) {
-            button = new RadioButton(group.getContext());
-            button.setText(bed.getRoomBedCount()+" "+bed.getRoomBedName());
-            button.setBackgroundResource(R.drawable.bg_border_rectangle);
-            RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(0,12,0,12);
-            button.setLayoutParams(lp);
-            button.setId(bed.getRoomBedId());
-            group.addView(button);
+        try{
+            for (Bed bed:beds
+            ) {
+                button = new RadioButton(group.getContext());
+                button.setText(bed.getRoomBedCount()+" "+bed.getRoomBedName());
+                button.setBackgroundResource(R.drawable.bg_border_rectangle);
+                RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0,12,0,12);
+                button.setLayoutParams(lp);
+                button.setId(bed.getRoomBedId());
+                group.addView(button);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
     @androidx.databinding.BindingAdapter("date")
