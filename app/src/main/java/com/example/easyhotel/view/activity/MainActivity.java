@@ -16,24 +16,26 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityMainBinding;
+import com.example.easyhotel.view.CheckInDateCallback;
+import com.example.easyhotel.view.DurationCallback;
 import com.example.easyhotel.view.Event;
 import com.example.easyhotel.view.adapter.MainBackgroundAdapter;
-import com.example.easyhotel.view.fragment.BottomSheetDurationFragment;
+import com.example.easyhotel.view.fragment.DurationFragment;
 import com.example.easyhotel.view.fragment.PickCheckInDateFragment;
 import com.example.easyhotel.view.fragment.SearchFragment;
 import com.example.easyhotel.viewmodel.MainViewModel;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements Event {
+public class MainActivity extends AppCompatActivity implements Event, CheckInDateCallback, DurationCallback {
     private ActivityMainBinding mBinding;
     private MainBackgroundAdapter mMainBackgroundAdapter;
     private int curren = Integer.MAX_VALUE / 2 + 1;
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements Event {
         }
         mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        PickCheckInDateFragment fragment = new PickCheckInDateFragment();
+        PickCheckInDateFragment fragment = new PickCheckInDateFragment(viewModel.date.getValue().getTime(),this);
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up, R.anim.slide_in_down, R.anim.slide_out_down, R.anim.slide_out_up).replace(R.id.main_container, fragment).addToBackStack(null).commit();
     }
 
@@ -122,8 +124,10 @@ public class MainActivity extends AppCompatActivity implements Event {
         }
         mLastClickTime = SystemClock.elapsedRealtime();
         mBinding.drawLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        BottomSheetDurationFragment fragment = new BottomSheetDurationFragment();
-        fragment.show(fragmentManager, fragment.getTag());
+        Date date = viewModel.date.getValue();
+        int duration = viewModel.duration.getValue();
+        DurationFragment fragment = new DurationFragment(date,duration,this);
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up, R.anim.slide_in_down, R.anim.slide_out_down, R.anim.slide_out_up).replace(R.id.main_container, fragment).addToBackStack(null).commit();
     }
 
     @Override
@@ -170,4 +174,13 @@ public class MainActivity extends AppCompatActivity implements Event {
     }
 
 
+    @Override
+    public void pickDate(Long date) {
+        viewModel.set_date(new Date(date));
+    }
+
+    @Override
+    public void pickDuration(int night) {
+        viewModel.set_duration(night);
+    }
 }

@@ -23,6 +23,8 @@ import com.example.easyhotel.data.model.SearchModel;
 import com.example.easyhotel.databinding.ActivityListHotelBinding;
 import com.example.easyhotel.view.ListHotelEvent;
 import com.example.easyhotel.view.adapter.ListHotelAdapter;
+import com.example.easyhotel.view.fragment.ChangeFilterFragment;
+import com.example.easyhotel.viewmodel.ListHotelFilterViewModel;
 import com.example.easyhotel.viewmodel.ListHotelViewModel;
 
 import java.util.List;
@@ -31,8 +33,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
     private ActivityListHotelBinding binding;
     private ListHotelAdapter adapter;
     private ListHotelViewModel viewModel;
-    private long checkIn;
-    private int duration;
+    private ListHotelFilterViewModel filterViewModel;
     private SearchModel location;
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -41,17 +42,29 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_hotel);
         viewModel = new ViewModelProvider(this).get(ListHotelViewModel.class);
+        filterViewModel = new ViewModelProvider(this).get(ListHotelFilterViewModel.class);
         adapter = new ListHotelAdapter();
         adapter.setEvent(this);
         binding.rvListHotel.setAdapter(adapter);
         binding.rvListHotel.setLayoutManager(new LinearLayoutManager(this));
         binding.setEvent(this);
-        checkIn= getIntent().getLongExtra("checkin",System.currentTimeMillis());
-        duration = getIntent().getIntExtra("duration",1);
+       filterViewModel.setCheckInDate( getIntent().getLongExtra("checkin",System.currentTimeMillis()));
+        filterViewModel.setDuration( getIntent().getIntExtra("duration",1));
         location = (SearchModel) getIntent().getSerializableExtra("location");
         binding.setLocation(location);
-        binding.setCheckin(checkIn);
-        binding.setDuration(duration);
+        filterViewModel.getCheckInDate().observe(this, new Observer<Long>() {
+            @Override
+            public void onChanged(Long aLong) {
+                binding.setCheckin(aLong);
+            }
+        });
+        filterViewModel.getDuration().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                binding.setDuration(integer);
+            }
+        });
+
         viewModel.getListHotel(location.getId(), null, null, null, null, null).observe(this, new Observer<List<Hotel>>() {
             @Override
             public void onChanged(List<Hotel> hotels) {
@@ -114,8 +127,20 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         mLastClickTime = SystemClock.elapsedRealtime();
         Intent intent = new Intent(ListHotelActivity.this, DetailsHotelActivity.class);
         intent.putExtra("hotelId",hotelId);
-        intent.putExtra("duration",duration);
-        intent.putExtra("checkin",checkIn);
+        intent.putExtra("duration",filterViewModel.getCheckInDate().getValue());
+        intent.putExtra("checkin",filterViewModel.getDuration().getValue());
         startActivity(intent);
+    }
+
+    @Override
+    public void changeFilter() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        Log.d("ccc", "changeFilter: ");
+        ChangeFilterFragment fragment = new ChangeFilterFragment();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_down,R.anim.slide_in_up,R.anim.slide_out_up,R.anim.slide_out_down)
+                .replace(R.id.fl_container,fragment).addToBackStack(null).commit();
     }
 }

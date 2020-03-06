@@ -9,4 +9,5 @@ public interface ListHotelEvent {
     void openLoc();
     void openMap();
     void pickHotel(int hotelId);
+    void changeFilter();
 }

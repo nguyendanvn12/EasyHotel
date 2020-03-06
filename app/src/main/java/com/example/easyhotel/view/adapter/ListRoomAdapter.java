@@ -62,7 +62,7 @@ public class ListRoomAdapter extends RecyclerView.Adapter<ListRoomAdapter.ViewHo
         });
         try {
             holder.binding.setRoom(rooms.get(room));
-            String url = "http://10.0.0.15/hotel/resource/hotel/";
+            String url = "http://10.1.42.83/hotel/resource/hotel/";
             Glide.with(context).load(url + rooms.get(room).getImgs().get(0))
                     .centerCrop().into(holder.binding.ivRoomThumb);
             holder.binding.tvBreakfast.setText(rooms.get(room).getRates().get(rate).getBreakfast() ? "Bữa ăn: bao gôm bữa ăn sáng" : "Bữa ăn: không bao gồm");
