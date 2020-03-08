@@ -29,28 +29,35 @@ import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.hoteldetails.HotelDetails;
 import com.example.easyhotel.data.model.roominfo.Room;
 import com.example.easyhotel.databinding.ActivityDetailsHotelBinding;
+import com.example.easyhotel.view.CheckInDateCallback;
 import com.example.easyhotel.view.DetailsHotelEvent;
+import com.example.easyhotel.view.DurationCallback;
 import com.example.easyhotel.view.PickRoom;
 import com.example.easyhotel.view.adapter.HotelImgViewpagerAdapter;
 import com.example.easyhotel.view.adapter.ListRoomAdapter;
 import com.example.easyhotel.view.fragment.BookingFragment;
 import com.example.easyhotel.view.fragment.DetailsRoomFragment;
+import com.example.easyhotel.view.fragment.DurationFragment;
+import com.example.easyhotel.view.fragment.PickCheckInDateFragment;
 import com.example.easyhotel.view.fragment.SearchFragment;
+import com.example.easyhotel.view.fragment.SetRoomCountFragment;
 import com.example.easyhotel.viewmodel.DetailsHotelViewModel;
+import com.example.easyhotel.viewmodel.ListHotelFilterViewModel;
+import com.example.easyhotel.viewmodel.ListHotelViewModel;
 import com.example.easyhotel.viewmodel.RoomViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class DetailsHotelActivity extends AppCompatActivity implements DetailsHotelEvent, PickRoom {
+public class DetailsHotelActivity extends AppCompatActivity implements DetailsHotelEvent, PickRoom, DurationCallback, CheckInDateCallback {
     private ActivityDetailsHotelBinding binding;
     private DetailsHotelViewModel detailsHotelViewModel;
     private ListRoomAdapter roomAdapter;
     private  HotelImgViewpagerAdapter imgAdapter;
     private int hotelId;
     private RoomViewModel roomViewModel;
-    private long checkInDate;
-    private int duration;
+    private ListHotelFilterViewModel filterViewModel;
     private long mLastClickTime;
     private FragmentManager fragmentManager;
 
@@ -62,13 +69,14 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details_hotel);
         detailsHotelViewModel = new ViewModelProvider(this).get(DetailsHotelViewModel.class);
         roomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
+        filterViewModel = new ViewModelProvider(this).get(ListHotelFilterViewModel.class);
         imgAdapter = new HotelImgViewpagerAdapter();
         binding.setLifecycleOwner(this);
         binding.setViewmodel(detailsHotelViewModel);
-        checkInDate = getIntent().getLongExtra("checkin",System.currentTimeMillis());
-        duration = getIntent().getIntExtra("duration",1);
-        detailsHotelViewModel.setcheckIndate(checkInDate);
-        detailsHotelViewModel.setduration(duration);
+        filterViewModel.setCheckInDate(getIntent().getLongExtra("checkin",System.currentTimeMillis()));
+       filterViewModel.setDuration(getIntent().getIntExtra("duration",1));
+
+       binding.setFilter(filterViewModel);
         binding.vpSlider.setAdapter(imgAdapter);
         binding.vpSlider.setPageTransformer(new ViewPager2.PageTransformer() {
             @Override
@@ -165,6 +173,40 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
     }
 
     @Override
+    public void changeCheckIn() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        PickCheckInDateFragment fragment = new PickCheckInDateFragment(filterViewModel.getCheckInDate().getValue(),this::pickDate);
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.container,fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void changeDuration() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        Date date = new Date(filterViewModel.getCheckInDate().getValue());
+        int duration = filterViewModel.getDuration().getValue();
+        DurationFragment fragment = new DurationFragment(date,duration,this);
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.container,fragment).addToBackStack(null).commit();
+
+    }
+
+    @Override
+    public void setRoomCount() {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        SetRoomCountFragment fragment = new SetRoomCountFragment();
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_up,R.anim.slide_in_down,R.anim.slide_out_down,R.anim.slide_out_up).replace(R.id.container,fragment).addToBackStack(null).commit();
+
+    }
+
+    @Override
     public void book(int room, int rate) {
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return;
@@ -185,5 +227,15 @@ public class DetailsHotelActivity extends AppCompatActivity implements DetailsHo
         roomViewModel.setActiveRoom(room,rate);
         DetailsRoomFragment fragment = new DetailsRoomFragment();
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_out_left).replace(R.id.container, fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void pickDate(Long date) {
+filterViewModel.setCheckInDate(date);
+    }
+
+    @Override
+    public void pickDuration(int night) {
+filterViewModel.setDuration(night);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class HotelImgViewpagerAdapter extends RecyclerView.Adapter<HotelImgViewpagerAdapter.ViewHolder> {
     private List<String> imgs;
     private Context context;
-    private StringBuilder url = new StringBuilder("http://10.1.42.83/hotel/resource/hotel/");
+    private StringBuilder url = new StringBuilder("http://10.0.0.15/hotel/resource/hotel/");
     public void setImgs(List<String> imgs) {
         this.imgs = imgs;
         notifyDataSetChanged();

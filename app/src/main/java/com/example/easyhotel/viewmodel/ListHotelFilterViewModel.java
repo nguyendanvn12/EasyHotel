@@ -7,6 +7,15 @@ import androidx.lifecycle.ViewModel;
 public class ListHotelFilterViewModel extends ViewModel {
 private MutableLiveData<Long> checkInDate = new MutableLiveData<>();
 private MutableLiveData<Integer> duration = new MutableLiveData<>();
+private MutableLiveData<Integer> roomCount = new MutableLiveData<>(1);
+
+    public LiveData<Integer> getRoomCount() {
+        return roomCount;
+    }
+
+    public void setRoomCount(int roomCount) {
+        this.roomCount.setValue(roomCount);
+    }
 
     public LiveData<Long> getCheckInDate() {
         return checkInDate;

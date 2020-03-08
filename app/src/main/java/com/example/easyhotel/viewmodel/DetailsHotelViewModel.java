@@ -12,8 +12,6 @@ public class DetailsHotelViewModel extends ViewModel {
     private MutableLiveData<Boolean> _isTienNghiShow = new MutableLiveData<Boolean>(false);
     private MutableLiveData<Boolean> _isMoTaShow = new MutableLiveData<Boolean>(false);
     private MutableLiveData<Boolean> _isChinhSachShow = new MutableLiveData<Boolean>(false);
-    private MutableLiveData<Long> _checkIndate = new MutableLiveData<>();
-    private MutableLiveData<Integer> _duration = new MutableLiveData<>();
     private HotelRePo dataRepo = new HotelRePo();
     private MutableLiveData<HotelDetails> _hotelDetails ;
 
@@ -21,8 +19,6 @@ public class DetailsHotelViewModel extends ViewModel {
     public LiveData<Boolean> isTienNghiShow = _isTienNghiShow;
     public LiveData<Boolean> isMoTaShow = _isMoTaShow;
     public LiveData<Boolean> isChinhSachShow = _isChinhSachShow;
-    public LiveData<Long> checkInDate = _checkIndate;
-    public LiveData<Integer> duration = _duration;
     public LiveData<HotelDetails> hotelDetails ;
 
 
@@ -31,13 +27,6 @@ public class DetailsHotelViewModel extends ViewModel {
         this.hotelDetails = _hotelDetails;
         return _hotelDetails;
     }
-    public void setcheckIndate(long _checkIndate) {
-        this._checkIndate.setValue(_checkIndate);
-    }
-
-    public void setduration(int _duration) {
-        this._duration.setValue( _duration);
-        }
 
     public void tienNghiVisibilityChange(){
         this._isTienNghiShow.setValue( _isTienNghiShow.getValue()==true?false:true);

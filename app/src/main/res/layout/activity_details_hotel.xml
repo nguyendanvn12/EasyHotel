@@ -5,7 +5,9 @@
 
     <data>
         <import type="android.view.View" />
-
+<variable
+    name="filter"
+    type="com.example.easyhotel.viewmodel.ListHotelFilterViewModel" />
         <variable
             name="viewmodel"
             type="com.example.easyhotel.viewmodel.DetailsHotelViewModel" />
@@ -276,6 +278,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:background="#fff"
+                        android:onClick="@{()->event.changeCheckIn()}"
                         android:orientation="vertical"
                         android:padding="8dp">
 
@@ -290,7 +293,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            checkindetails = "@{viewmodel.checkInDate}"
+                            checkindetails = "@{filter.checkInDate}"
                             android:textAlignment="center"
                             android:textColor="#3266a8" />
                     </LinearLayout>
@@ -301,6 +304,7 @@
                         android:layout_marginLeft="2dp"
                         android:layout_weight="5"
                         android:background="#fff"
+                        android:onClick="@{()->event.changeDuration()}"
                         android:orientation="vertical"
                         android:padding="8dp">
 
@@ -315,8 +319,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            checkindetails="@{viewmodel.checkInDate}"
-                            duration = "@{viewmodel.duration}"
+                            checkindetails="@{filter.checkInDate}"
+                            duration = "@{filter.duration}"
                             android:textAlignment="center"
                             android:textColor="#3266a8" />
                     </LinearLayout>
@@ -326,6 +330,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="2"
+                        android:onClick="@{()->event.setRoomCount()}"
                         android:background="#fff"
                         android:orientation="vertical"
                         android:padding="8dp">
@@ -341,7 +346,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="01"
+                            android:text="@{`0`+filter.roomCount}"
                             android:textAlignment="center"
                             android:textColor="#3266a8" />
                     </LinearLayout>

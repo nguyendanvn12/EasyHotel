@@ -14,12 +14,16 @@ import android.widget.RadioGroup;
 
 import com.example.easyhotel.R;
 import com.example.easyhotel.databinding.FragmentBookingBinding;
+import com.example.easyhotel.viewmodel.BookingViewModel;
 import com.example.easyhotel.viewmodel.DetailsHotelViewModel;
+import com.example.easyhotel.viewmodel.ListHotelFilterViewModel;
 import com.example.easyhotel.viewmodel.RoomViewModel;
 
 public class BookingFragment extends Fragment {
     private FragmentBookingBinding binding;
     private DetailsHotelViewModel hotelViewModel;
+    private ListHotelFilterViewModel filterViewModel;
+    private BookingViewModel bookingViewModel;
     private RoomViewModel roomViewModel;
 
     @Override
@@ -27,10 +31,14 @@ public class BookingFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_booking, container, false);
         roomViewModel = new ViewModelProvider(requireActivity()).get(RoomViewModel.class);
+        filterViewModel = new ViewModelProvider(requireActivity()).get(ListHotelFilterViewModel.class);
         hotelViewModel = new ViewModelProvider(requireActivity()).get(DetailsHotelViewModel.class);
+        bookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
         binding.setLifecycleOwner(this);
         binding.setHotel(hotelViewModel);
         binding.setRoom(roomViewModel);
+        binding.setFilter(filterViewModel);
+        binding.setBooking(bookingViewModel);
         binding.rgSelectBed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

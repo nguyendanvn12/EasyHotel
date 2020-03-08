@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+<variable
+    name="filter"
+    type="com.example.easyhotel.viewmodel.ListHotelFilterViewModel" />
+        <variable
+            name="booking"
+            type="com.example.easyhotel.viewmodel.BookingViewModel" />
         <variable
             name="hotel"
             type="com.example.easyhotel.viewmodel.DetailsHotelViewModel" />
@@ -12,6 +18,7 @@
         <variable
             name="room"
             type="com.example.easyhotel.viewmodel.RoomViewModel" />
+
     </data>
 
     <LinearLayout
@@ -127,7 +134,7 @@
                         android:id="@+id/tv_check_in"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        date="@{hotel.checkInDate}"
+                        date="@{filter.checkInDate}"
                         android:layout_marginStart="16dp"
                         app:layout_constraintEnd_toStartOf="@id/view1"
                         app:layout_constraintStart_toEndOf="@id/iv_hotel_thumb"
@@ -148,7 +155,7 @@
                         android:id="@+id/check_out"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        date="@{hotel.checkInDate+((long)hotel.duration*86400000)}"
+                        date="@{filter.checkInDate+((long)filter.duration*86400000)}"
                         android:layout_marginStart="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/view1"
@@ -158,7 +165,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="1 đêm, 1 phòng"
+                        android:text="@{filter.duration+` đêm, `+filter.roomCount+` phòng`}"
                         app:layout_constraintBottom_toBottomOf="@id/iv_hotel_thumb"
                         app:layout_constraintStart_toEndOf="@id/iv_hotel_thumb" />
 
@@ -270,6 +277,7 @@
                         android:layout_marginVertical="16dp">
 
                         <RadioButton
+                            android:checked="@={booking.isCheckIn}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Tôi là người nhận phòng" />
@@ -282,6 +290,7 @@
                     </RadioGroup>
 
                     <LinearLayout
+                        android:visibility="@{booking.isCheckIn==true?View.GONE:View.VISIBLE}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="16dp"
@@ -343,9 +352,11 @@
                     <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:checked="@={booking.cmt}"
                         android:text="Để lại lời nhắn với khách sạn" />
 
                     <EditText
+                        android:visibility="@{booking.cmt==true?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_border_rectangle"

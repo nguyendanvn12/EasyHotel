@@ -3,6 +3,7 @@ package com.example.easyhotel.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +51,9 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         binding.setEvent(this);
        filterViewModel.setCheckInDate( getIntent().getLongExtra("checkin",System.currentTimeMillis()));
         filterViewModel.setDuration( getIntent().getIntExtra("duration",1));
+
+        Log.d("ccc", "onCreate: "+filterViewModel.getCheckInDate().getValue());
+
         location = (SearchModel) getIntent().getSerializableExtra("location");
         binding.setLocation(location);
         filterViewModel.getCheckInDate().observe(this, new Observer<Long>() {
@@ -77,8 +81,13 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(fragmentManager.getBackStackEntryCount()>0){
+            fragmentManager.popBackStack();
+        }else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -127,8 +136,8 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         mLastClickTime = SystemClock.elapsedRealtime();
         Intent intent = new Intent(ListHotelActivity.this, DetailsHotelActivity.class);
         intent.putExtra("hotelId",hotelId);
-        intent.putExtra("duration",filterViewModel.getCheckInDate().getValue());
-        intent.putExtra("checkin",filterViewModel.getDuration().getValue());
+        intent.putExtra("duration",filterViewModel.getDuration().getValue());
+        intent.putExtra("checkin",filterViewModel.getCheckInDate().getValue());
         startActivity(intent);
     }
 
@@ -143,4 +152,7 @@ public class ListHotelActivity extends AppCompatActivity implements ListHotelEve
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_down,R.anim.slide_in_up,R.anim.slide_out_up,R.anim.slide_out_down)
                 .replace(R.id.fl_container,fragment).addToBackStack(null).commit();
     }
+
+
+
 }

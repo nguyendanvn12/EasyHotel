@@ -187,4 +187,10 @@ public class BindingAdapter {
         String text = view.getContext().getString(R.string.date,format.format(date),format1.format(date));
         view.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT));
     }
+    @androidx.databinding.BindingAdapter("date1")
+    public static void setDate1(TextView view,long date1){
+        Date date = new Date(date1);
+        SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy");
+        view.setText(format.format(date));
+    }
 }

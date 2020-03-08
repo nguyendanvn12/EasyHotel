@@ -8,4 +8,7 @@ public interface DetailsHotelEvent {
     void callCSKH();
     void preSlide();
     void nextSlide();
+    void changeCheckIn();
+    void changeDuration();
+    void setRoomCount();
 }
