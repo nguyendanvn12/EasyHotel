@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.easyhotel.data.converter.DataConverter"/>
         <import type="android.view.View"/>
+        <import type="android.text.Html"/>
 <variable
     name="filter"
     type="com.example.easyhotel.viewmodel.ListHotelFilterViewModel" />
@@ -88,7 +90,7 @@
                         android:id="@+id/iv_hotel_thumb"
                         android:layout_width="60dp"
                         android:layout_height="120dp"
-                        android:src="@drawable/background3"
+                        hotelThumb="@{hotel.hotelDetails.thumb}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -224,6 +226,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={booking.bookingFirstName}"
                         android:background="@drawable/bg_border_rectangle"
                         android:padding="4dp" />
 
@@ -237,6 +240,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={booking.bookingLastName}"
                         android:background="@drawable/bg_border_rectangle"
                         android:padding="4dp" />
 
@@ -250,6 +254,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={booking.bookingPhoneNumber}"
                         android:background="@drawable/bg_border_rectangle"
                         android:padding="4dp" />
 
@@ -263,6 +268,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={booking.bookingEmail}"
                         android:background="@drawable/bg_border_rectangle"
                         android:padding="4dp" />
 
@@ -319,6 +325,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={booking.checkInFirstName}"
                             android:background="@drawable/bg_border_rectangle"
                             android:padding="4dp" />
 
@@ -332,6 +339,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={booking.checkInLastName}"
                             android:background="@drawable/bg_border_rectangle"
                             android:padding="4dp" />
 
@@ -345,6 +353,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={booking.checkInPhoneNumber}"
                             android:background="@drawable/bg_border_rectangle"
                             android:padding="4dp" />
                     </LinearLayout>
@@ -359,6 +368,7 @@
                         android:visibility="@{booking.cmt==true?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@={booking.bookingNote}"
                         android:background="@drawable/bg_border_rectangle"
                         android:inputType="textMultiLine"
                         android:lines="5"
@@ -372,15 +382,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:layout_gravity="bottom"
             android:padding="12dp">
 
             <TextView
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="4dp"
-                android:text="Tổng cộng: 2.502.700đ"
+                android:layout_height="24dp"
+                android:text="@{Html.fromHtml(@string/total_cost(DataConverter.currency(booking.totalCost)))}"
                 app:layout_constraintBottom_toTopOf="@+id/tv_vat"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -388,21 +397,22 @@
             <TextView
                 android:id="@+id/tv_vat"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Tổng cộng: 2.502.700đ"
+                android:layout_height="wrap_content"
+                android:text="Đã bao gồm thuế VAT"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/main"
                 android:text="Tiếp tục"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

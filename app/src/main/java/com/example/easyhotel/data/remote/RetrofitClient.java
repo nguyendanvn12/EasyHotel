@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;// 10.1.42.83
-    private static final String URL= "http://10.0.0.15/hotel/";
+    private static final String URL= "http://10.1.42.83/hotel/";
 
     public static SearchService getClient(){
         if(retrofit==null){

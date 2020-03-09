@@ -21,7 +21,5 @@
     <string name="account_preference">account</string>
     <string name="acc_key">ACC</string>
     <string name="date">&lt;p>&lt;b>%1$s&lt;/b>&lt;br/>&lt;span>%2$s&lt;/span>&lt;/p></string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="total_cost">&lt;p>Tổng cộng: &lt;big>&lt;span style="color:#5a8a0d;">%s&lt;/span>&lt;/big>&lt;/p></string>
 </resources>

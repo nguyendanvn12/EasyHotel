@@ -39,10 +39,12 @@ public class BookingFragment extends Fragment {
         binding.setRoom(roomViewModel);
         binding.setFilter(filterViewModel);
         binding.setBooking(bookingViewModel);
+        bookingViewModel.initBookingInfo(hotelViewModel,roomViewModel,filterViewModel);
         binding.rgSelectBed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 roomViewModel.selectBed(checkedId);
+                bookingViewModel.setBed(checkedId);
             }
         });
         return binding.getRoot();

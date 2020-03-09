@@ -45,7 +45,7 @@ public class ListHotelAdapter extends RecyclerView.Adapter<ListHotelAdapter.View
         Hotel hotel =hotels.get(position);
         binding.setData(hotel);
         binding.setEvent(event);
-        String url = "http://10.0.0.15/hotel/resource/hotel/"+hotel.getThumb();
+        String url = "http://10.1.42.83/hotel/resource/hotel/"+hotel.getThumb();
         Glide.with(context)
                 .load(url.toString())
                 .centerCrop()

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.easyhotel.R;
 import com.example.easyhotel.data.model.roominfo.Bed;
 
@@ -192,5 +194,10 @@ public class BindingAdapter {
         Date date = new Date(date1);
         SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy");
         view.setText(format.format(date));
+    }
+    @androidx.databinding.BindingAdapter("hotelThumb")
+    public static void setThumb(ImageView view,String url) {
+        Glide.with(view.getContext()).load("http://10.1.42.83/hotel/resource/hotel/"+url)
+                .centerCrop().into(view);
     }
 }

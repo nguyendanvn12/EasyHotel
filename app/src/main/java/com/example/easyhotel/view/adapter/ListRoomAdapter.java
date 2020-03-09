@@ -2,6 +2,7 @@ package com.example.easyhotel.view.adapter;
 
 import android.content.Context;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +63,14 @@ public class ListRoomAdapter extends RecyclerView.Adapter<ListRoomAdapter.ViewHo
         });
         try {
             holder.binding.setRoom(rooms.get(room));
-            String url = "http://10.0.0.15/hotel/resource/hotel/";
+            String url = "http://10.1.42.83/hotel/resource/hotel/";
             Glide.with(context).load(url + rooms.get(room).getImgs().get(0))
                     .centerCrop().into(holder.binding.ivRoomThumb);
             holder.binding.tvBreakfast.setText(rooms.get(room).getRates().get(rate).getBreakfast() ? "Bữa ăn: bao gôm bữa ăn sáng" : "Bữa ăn: không bao gồm");
             holder.binding.tvRefund.setText(rooms.get(room).getRates().get(rate).getRefund() ? "Hoàn huỷ: có hoàn huỷ" : "Hoàn huỷ: không hoàn huỷ");
             long startDiscount = rooms.get(room).getRates().get(rate).getStartDiscount();
             long endDiscount = rooms.get(room).getRates().get(rate).getEndDiscount();
-            if (System.currentTimeMillis() / 1000 >= startDiscount && System.currentTimeMillis() / 1000 >= startDiscount) {
+            if (System.currentTimeMillis() / 1000 >= startDiscount && System.currentTimeMillis() / 1000 <= endDiscount) {
                 int dis = rooms.get(room).getRates().get(rate).getDiscount();
                 int orig = rooms.get(room).getRates().get(rate).getOriginPrice();
                 int sale = orig - orig * dis / 100;
@@ -81,11 +82,11 @@ public class ListRoomAdapter extends RecyclerView.Adapter<ListRoomAdapter.ViewHo
                     holder.binding.tvDiscount.setVisibility(View.GONE);
                 }
                 holder.binding.tvSalePrice.setText(Html.fromHtml(context.getString(R.string.sale, DataConverter.currency(sale)), Html.FROM_HTML_MODE_COMPACT));
-
             } else {
+                int orig = rooms.get(room).getRates().get(rate).getOriginPrice();
                 holder.binding.tvDiscount.setVisibility(View.GONE);
                 holder.binding.tvOriginPrice.setVisibility(View.GONE);
-                holder.binding.tvSalePrice.setText("");
+                holder.binding.tvSalePrice.setText(Html.fromHtml(context.getString(R.string.sale, DataConverter.currency(orig)), Html.FROM_HTML_MODE_COMPACT));
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();
